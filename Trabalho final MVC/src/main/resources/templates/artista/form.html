@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" th:href="@{/css/stylesArtCriar.css}">
+    <title th:text="${artista.codigo != null ? 'Editar Artista' : 'Adicionar Artista'}">Editar Atista</title>
+</head>
+<body>
+    <body>
+        <div class="wrapper">
+    
+            <form th:action="@{${artista.codigo != null ? '/artista/editar/' + artista.codigo : '/artista/novo'}}" th:object="${artista}" method="post">
+                <h1 th:text="${artista.codigo != null ? 'Atualizar artista' : 'Adicionar artista'}">Atualizar</h1>
+                <div class="input-box">
+                    <input type="number" th:field="*{codigo}" placeholder="Código" required th:readonly="true">
+                    <i class='bx bx-qr' ></i>
+                </div>
+                <div class="input-box">
+                    <input type="text" th:field="*{nome}" placeholder="Nome" required>
+                    <i class='bx bxs-music'></i>
+                </div>
+                <div class="input-box">
+                    <input type="text" th:field="*{idade}" placeholder="Idade" required>
+                    <i class='bx bxs-calendar'></i>
+                </div>
+                <div class="input-select">
+                    <select id="genero" name="genero" th:field="*{genero.codigo}">
+                        <option value="" disabled selected >Selecione <i class='bx bxs-music'></i></option>
+                        <option th:each="genero : ${generos}"
+                                th:value="${genero.codigo}"
+                                th:text="${genero.descricao}" style="color: rgb(37, 37, 37);">
+                        </option>
+                    </select>
+                </div>
+                
+                <button type="submit" class="btn" th:text="${artista.codigo != null ? 'Editar' : 'Adicionar'}">Editar</button>
+
+                <div class="register-link">
+                    <p><a th:href="@{/artista}" class="register-link">Voltar</a></p>
+                </div>
+            </form>
+        </div>    
+    </body>
+</body>
+</html> 

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" th:href="@{/css/stylesArtistas.css}">
+    <title>Artistas</title>
+</head>
+<header th:insert="~{fragments/menu :: menu}"></header>
+<body>
+    <div class="wrapper">
+        <h1>Os melhores de cada onda</h1>
+
+        <div th:if="${mensagem}" class="mensagem-servidor">
+            <p th:text="${mensagem}"></p>
+        </div>
+        
+        <table>
+            <thead>
+                <th>Cód.</th>
+                <th>Nome</th>
+                <th>Idade</th>
+                <th>Gênero Musical</th>
+            </thead>
+            <tbody>
+                <tr th:each="artista : ${artistas}">
+                    <td th:text="${artista.codigo}">Código</td>
+                    <td th:text="${artista.nome}">Nome</td>
+                    <td th:text="${artista.idade}">Idade</td>
+                    <td th:text="${artista.genero.descricao}">Gênero Musical</td>
+                    <td>
+                        <a th:href="@{/artista/editar/{codigo}(codigo=${artista.codigo})}" class="btn">Editar <i class='bx bxs-edit-alt'></i></a>
+                    </td>
+                    <td>
+                        <form th:action="@{/artista/excluir/{codigo}(codigo=${artista.codigo})}" method="post" th:onsubmit="return confirm('Tem certeza que deseja excluir?');" style="display: inline;">
+                            <button type="submit" class="btn">Excluir <i class='bx bxs-volume-mute'></i>
+                        </form>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <p><a href="#" th:href="@{/artista/novo}" class="btnAdd">Adicionar novo artista</a></p>
+    </div>
+</body>
+</html>
