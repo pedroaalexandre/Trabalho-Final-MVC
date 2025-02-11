@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link th:href="@{/css/stylesLista.css}" rel="stylesheet">
+    <link rel="stylesheet" href="/projeto_crud/src/main/resources/static/css/stylesLista.css">
+    <title>Usuários</title>
+</head>
+
+<body>
+    <div class="wrapper">
+
+        <h1>Usuários</h1>
+
+        <div th:if="${#lists.isEmpty(usuarios)}" class="mensagem-servidor">
+            <p>Sem usuários cadastrados.</p>
+        </div>
+            
+        <div th:unless="${#lists.isEmpty(usuarios)}">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Código</th>
+                        <th>Nome</th>
+                        <th>Login</th>
+                        <th>Senha</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="usuario : ${usuarios}">
+                        <td th:text="${usuario.codigo}">Cód. Usuário</td>
+                        <td th:text="${usuario.nome}">Nome</td>
+                        <td th:text="${usuario.login}">Login</td>
+                        <td th:text="${usuario.senha}">Senha</td>
+                        <td>
+                            <a th:href="@{/usuario/editar/{login}(login=${usuario.login})}" class="btn">Editar <i class='bx bxs-edit-alt'></i></a>
+                        </td>
+                        <td>
+                            <form th:action="@{/usuario/excluir/{login}(login=${usuario.login})}" method="post" th:onsubmit="return confirm('Tem certeza que deseja excluir?');" style="display: inline;">
+                                <button type="submit" class="btn">Excluir <i class='bx bxs-user-x'></i></button>
+                            </form>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+            <div class="register-link">
+                <p>Já tem uma conta? <a href="#" th:href="@{/}">Fazer Login</a></p>
+                <p><a href="#" th:href="@{/usuario/cadastro}">Cadastrar-se</a></p>
+            </div>
+    </div>    
+</body>
+
+</html>

@@ -1,0 +1,46 @@
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+     <title th:text="${musica.cod_musica != null ? 'Editar Música' : 'Nova Música'}">Formulário de música</title>
+     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+     <link th:href="@{/css/styles.css}" rel="stylesheet"> 
+</head>
+<body>
+     <div class="wrapper">
+
+          <h1 th:text="${musica.cod_musica != null ? 'Editar Música' : 'Nova Música'}">Formulário de música</h1>
+
+          <div th:if="${mensagem}" class="mensagem-servidor">
+               <p th:text="${mensagem}"></p>
+          </div>
+
+          <form class="formulario" th:action="@{${musica.cod_musica != null ? '/musica/editar/' + musica.cod_musica : '/musica/novo'}}" th:object="${musica}" method="post">
+               <div class="input-box">
+                    <input type="number" th:field="*{cod_musica}" placeholder="Código" required th:readonly="true">
+                    <i class='bx bx-qr' ></i>
+               </div>
+
+               <div class="input-box">
+                     <input type="text" id="titulo"  name="name" th:field="*{titulo}" placeholder="Digite o nome da música" required>
+               </div>
+               
+               <div class="input-box">
+                    <input type="number" id="anoLanc" min="1860" max="2024" th:field="*{ano_lancamento}" placeholder="Ano de lançamento" required>
+                    <i class='bx bx-qr' ></i>
+               </div>
+               
+               <div class="input-box">
+                    <input type="text" id="duracao" th:field="*{duracao}" placeholder="Duração em minutos" required>
+                    <i class='bx bx-qr' ></i>
+               </div>
+
+               <div class="input-box">
+                    <input type="text" id="artista" th:field="*{artista}" placeholder="Artista" required>
+                    <i class='bx bx-qr' ></i>
+               </div>
+               
+               <button type="submit" class="btn" th:text="${musica.cod_musica != null ? 'Atualizar' : 'Salvar'}" required>Salvar/Atulizar</button>
+          </form>
+     </div>
+</body>
+</html>

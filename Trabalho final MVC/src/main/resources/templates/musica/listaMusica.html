@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" th:href="@{/css/stylesGeneros.css}">
+    <title>Lista de Músicas</title>
+</head>
+<header th:insert="~{fragments/menu :: menu}"></header>
+<body>  
+    <div class="wrapper">
+
+        <h1>Lista de Músicas</h1>   
+        
+        <div th:if="${mensagem}" class="mensagem-servidor">
+            <p th:text="${mensagem}"></p>
+        </div>
+        
+        <div class="actions">
+            <!-- Botão que levará o usuário para a página de criação de músicas -->        
+            <a href="#" th:href="@{/musica/novo}" class="btn btnAdicionar">Adicionar uma nova música</a> <br><br>
+        </div>
+        
+        <table>
+            <thead>
+                <!-- Marcação do cabeçalho da tabela -->
+                <th>Código</th>
+                <th>Título</th>
+                <th>Ano Lançamento</th>
+                <th>Duração</th>
+                <th>Artista</th>
+                <th>Ações</th>
+            </thead>
+            
+            <tbody>
+                <!-- Campos da tabela que serão preenchidos pelo backend  -->
+                <tr th:each="musica : ${musicas}">
+                    <td th:text="${musica.cod_musica}">Codigo</td>
+                    <td th:text="${musica.titulo}" class="upperCase">Título</td>
+                    <td th:text="${musica.ano_lancamento}">Ano Lanc</td>
+                    <td th:text="${musica.duracao}">Duração</td>
+                    <td th:text="${musica.artista}">Artista</td>
+                    
+                    <!-- Coluna "Ações" HTML -->
+                    <td>
+                        <a th:href="@{/musica/editar/{cod_musica}(cod_musica=${musica.cod_musica})}" class="btn btnEditar">Editar</a>
+                        
+                        <form th:action="@{/musica/excluir/{cod_musica}(cod_musica=${musica.cod_musica})}" method="post" 
+                        th:onsubmit="return confirm('Tem certeza que deseja excluir?');" style="display:inline;">
+                        <button type="submit" class="btn btnExcluir">Excluir<i class='bx bxs-volume-mute'></i></button>
+                    </form>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    </div>
+    <!-- <div class="retorno">
+        <a href="#" th:href="@{/}" class="btn btnVoltar">Acessar CRUD Usuários</a> <br><br>
+    </div> -->
+    </div>
+</body>
+</html>
+</body>

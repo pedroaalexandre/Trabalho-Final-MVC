@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link th:href="@{/css/styles.css}" rel="stylesheet">
+    <title th:text="${usuario.login != null ? 'Editar' : 'Cadastro'}">Cadastro</title>
+</head>
+
+<body>
+    <div class="wrapper">
+
+        <form th:action="@{${usuario.login != null ? '/usuario/editar/' + usuario.login : '/usuario/cadastro'}}" th:object="${usuario}" method="post">
+            <h1 th:text="${usuario.login != null ? 'Editar' : 'Cadastro'}">Cadastro</h1>
+            <div class="input-box">
+                <input type="number" th:field="*{codigo}" placeholder="Código de usuário" th:readonly="true">
+                <i class='bx bx-qr' ></i>
+            </div>
+            <div class="input-box">
+                <input type="text" th:field="*{nome}" placeholder="Nome" required>
+                <i class='bx bx-rename' ></i>
+            </div>
+            <div class="input-box">
+                <input type="text" th:field="*{login}" placeholder="Usuário" required th:readonly="${usuario.login != null}">
+                <i class='bx bxs-user'></i>
+            </div>
+            <div class="input-box">
+                <input type="password" th:field="*{senha}" placeholder="Senha" required>
+                <i class='bx bxs-lock-alt' ></i>
+            </div>
+            
+            <button type="submit" class="btn" th:text="${usuario.login != null ? 'Atualizar' : 'Cadastrar'}">Cadastrar</button>
+
+            <div class="register-link">
+                <p>Já tem uma conta? <a href="#" th:href="@{/}">Fazer Login</a></p>
+                <p>Lista de cadastros - <a href="#" th:href="@{/usuario/lista}">Editar cadastros</a></p>
+            </div>
+        </form>
+    </div>    
+</body>
+
+</html>
