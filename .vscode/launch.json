@@ -1,0 +1,14 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-ProjetoCrudApplication<projeto_crud>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "br.iftm.edu.tspi.pmvc.projeto_crud.ProjetoCrudApplication",
+            "projectName": "projeto_crud",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        }
+    ]
+}
