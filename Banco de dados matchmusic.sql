@@ -12,7 +12,7 @@ nome_Usuario varchar (255)
 create table genero (
 	cod_genero int auto_increment primary key,
     desc_genero varchar (40),
-    ano_surgimento year,
+    ano_surgimento varchar(7),
     local_surgimento varchar (40)
 );
 
