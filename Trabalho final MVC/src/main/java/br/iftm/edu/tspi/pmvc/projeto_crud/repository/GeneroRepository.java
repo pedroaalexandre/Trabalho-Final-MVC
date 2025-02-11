@@ -42,16 +42,25 @@ public class GeneroRepository {
     }
     
     public boolean delete(Integer codigo) {
-        String sql = "delete from genero where cod_genero = ?";
+        String sql = """
+                delete from genero
+                where cod_genero = ?
+                """;
         return conexaoBanco.update(sql, codigo) > 0;
     }
 
     public boolean update(Genero genero) {
-        String sql = "update genero set cod_genero = ?, desc_genero = ?, ano_surgimento = ?, local_surgimento = ?";
+        String sql = """
+                update genero 
+                set desc_genero = ?, 
+                    ano_surgimento = ?,
+                    local_surgimento = ? 
+                where cod_genero = ?
+                """;
         return conexaoBanco.update(sql,
-                            genero.getCodigo(),
                             genero.getDescricao(),
                             genero.getData(),
-                            genero.getPais()) > 0;
+                            genero.getPais(),
+                            genero.getCodigo()) > 0;
     }
 }

@@ -170,10 +170,9 @@ public class ArtistaRepository {
                 where cod_artista = ?
                 """;
         return conexaoBanco.update(sql,    
-                artista.getCodigo(),
                 artista.getNome(),
                 artista.getIdade(),
-                artista.getGenero().getCodigo()) > 0;
+                artista.getGenero().getCodigo(), artista.getCodigo()) > 0;
     }
 
     public void delete(Integer codigo) {
@@ -191,7 +190,7 @@ public class ArtistaRepository {
                             g.ano_surgimento,
                             g.local_surgimento
                     from artista a, genero g
-                    where g.cod_genero = a.cod_genero and cod_album = ?;
+                    where g.cod_genero = a.cod_genero and cod_artista = ?;
                     """;
         return conexaoBanco.queryForObject(sql, (rs, rowNum) -> {
                 Artista artista = new Artista();
@@ -207,6 +206,6 @@ public class ArtistaRepository {
 
                 artista.setGenero(genero);
                 return artista;
-        });
+        },Codigo);
     }
 }
