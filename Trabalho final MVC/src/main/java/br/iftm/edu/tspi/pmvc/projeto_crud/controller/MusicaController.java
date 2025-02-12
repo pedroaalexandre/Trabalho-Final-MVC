@@ -66,17 +66,31 @@ public class MusicaController {
     }
 
     // Utilizado para abrir um formulário para a edição de um música já cadastrada;
+    // @GetMapping("/editar/{codigo}")
+    // public String abrirFormEditar(@PathVariable("codigo") Integer codigo, Model model, RedirectAttributes redirectAttributes) {   
+    //     Musica musicaBusca = musicaRepository.buscaPorCodigo(codigo);
+    //     if (musicaBusca == null) {
+    //         redirectAttributes.addFlashAttribute(ATRIBUTO_MENSAGEM, codigo + "não encontrado.");
+    //         return URL_REDIRECT_LISTA;
+    //     } else {
+    //         model.addAttribute(ATRIBUTO_OBJETO, musicaBusca);
+    //         return URL_FORM;
+    //     }
+    // } 
+
     @GetMapping("/editar/{codigo}")
-    public String abrirFormEditar(@PathVariable("codigo") Integer codigo, Model model, RedirectAttributes redirectAttributes) {   
+    public String abrirFormEditar(@PathVariable("codigo") Integer codigo, Model model, RedirectAttributes redirectAttributes) {
         Musica musicaBusca = musicaRepository.buscaPorCodigo(codigo);
-        if (musicaBusca == null) {
-            redirectAttributes.addFlashAttribute(ATRIBUTO_MENSAGEM, codigo + "não encontrado.");
+        if(musicaBusca == null) {
+            redirectAttributes.addFlashAttribute(ATRIBUTO_MENSAGEM, codigo + " não encontrado.");
             return URL_REDIRECT_LISTA;
-        } else {
+        }else{
             model.addAttribute(ATRIBUTO_OBJETO, musicaBusca);
+            List<Musica> musicas = musicaRepository.listar();
+            model.addAttribute("musicas", musicas);
             return URL_FORM;
         }
-    } 
+    }
 
     // Utilizado para realizar uma requição de criação de uma nova música e inclui-la as informações na listagem;
     @PostMapping("/novo")

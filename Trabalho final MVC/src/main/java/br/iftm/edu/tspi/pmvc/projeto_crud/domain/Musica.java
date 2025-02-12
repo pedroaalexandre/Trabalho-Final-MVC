@@ -4,7 +4,7 @@ public class Musica {
      
      private Integer codigo;
      private String titulo; 
-     private int anoLancamento; 
+     private Integer anoLancamento;
      private String duracao;
      private Artista artista;
 
@@ -20,7 +20,7 @@ public class Musica {
           this.titulo = titulo;
      }
 
-     public Musica(Integer codigo, String titulo, int anoLancamento, String duracao, Artista artista) {
+     public Musica(Integer codigo, String titulo, Integer anoLancamento, String duracao, Artista artista) {
           this.codigo = codigo;
           this.titulo = titulo;
           this.anoLancamento = anoLancamento;
@@ -44,11 +44,11 @@ public class Musica {
           this.titulo = titulo;
      }
 
-     public int getAnoLancamento() {
+     public Integer getAnoLancamento() {
           return anoLancamento;
      }
 
-     public void setAnoLancamento(int anoLancamento) {
+     public void setAnoLancamento(Integer anoLancamento) {
           this.anoLancamento = anoLancamento;
      }
 
