@@ -1,7 +1,5 @@
 package br.iftm.edu.tspi.pmvc.projeto_crud.repository;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.List;
 
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -85,7 +83,8 @@ public class ArtistaRepository {
                             g.desc_genero,
                             g.cod_genero
                     from artista a, genero g
-                    where g.cod_genero = a.cod_genero;
+                    where g.cod_genero = a.cod_genero
+                    order by a.cod_artista
                     """;
         return conexaoBanco.query(sql, (rs, rowNum) -> {
                 Artista artista = new Artista();
@@ -102,21 +101,21 @@ public class ArtistaRepository {
         });
     }
 
-    public Artista geArtista(ResultSet rs) throws SQLException {
-        Artista artista = new Artista();
-        artista.setCodigo(rs.getInt("cod_artista"));
-        artista.setNome(rs.getString("nome_artista"));
-        artista.setIdade(rs.getInt("idade_artista"));
+    // public Artista geArtista(ResultSet rs) throws SQLException {
+    //     Artista artista = new Artista();
+    //     artista.setCodigo(rs.getInt("cod_artista"));
+    //     artista.setNome(rs.getString("nome_artista"));
+    //     artista.setIdade(rs.getInt("idade_artista"));
 
-        Genero genero = new Genero();
-        genero.setCodigo(rs.getInt("cod_genero"));
-        genero.setDescricao(rs.getString("desc_genero"));
-        genero.setData(rs.getString("ano_surgimento"));
-        genero.setPais(rs.getString("local_surgimento"));
+    //     Genero genero = new Genero();
+    //     genero.setCodigo(rs.getInt("cod_genero"));
+    //     genero.setDescricao(rs.getString("desc_genero"));
+    //     genero.setData(rs.getString("ano_surgimento"));
+    //     genero.setPais(rs.getString("local_surgimento"));
 
-        artista.setGenero(genero);
-        return artista;
-    }
+    //     artista.setGenero(genero);
+    //     return artista;
+    // }
 
     public List<Artista> buscarPorNome(String nome) {
         String sql = """
@@ -176,7 +175,7 @@ public class ArtistaRepository {
     }
 
     public void delete(Integer codigo) {
-        String sql = "delete from artista where cod_album = ?";
+        String sql = "delete from artista where cod_artista = ?";
         conexaoBanco.update(sql, codigo);
     }
 

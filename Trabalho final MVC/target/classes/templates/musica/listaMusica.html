@@ -17,10 +17,6 @@
             <p th:text="${mensagem}"></p>
         </div>
         
-        <div class="actions">
-            <!-- Botão que levará o usuário para a página de criação de músicas -->        
-            <a href="#" th:href="@{/musica/novo}" class="btn btnAdicionar">Adicionar uma nova música</a> <br><br>
-        </div>
         
         <table>
             <thead>
@@ -29,6 +25,7 @@
                 <th>Título</th>
                 <th>Ano Lançamento</th>
                 <th>Duração</th>
+                <th>Genero</th>
                 <th>Artista</th>
                 <th>Ações</th>
             </thead>
@@ -36,24 +33,32 @@
             <tbody>
                 <!-- Campos da tabela que serão preenchidos pelo backend  -->
                 <tr th:each="musica : ${musicas}">
-                    <td th:text="${musica.cod_musica}">Codigo</td>
+                    <td th:text="${musica.codigo}">Codigo</td>
                     <td th:text="${musica.titulo}" class="upperCase">Título</td>
-                    <td th:text="${musica.ano_lancamento}">Ano Lanc</td>
+                    <td th:text="${musica.anoLancamento}">Ano Lanc</td>
                     <td th:text="${musica.duracao}">Duração</td>
-                    <td th:text="${musica.artista}">Artista</td>
+                    <td th:text="${musica.artista.genero.descricao}">Genero Musical</td>
+                    <td th:text="${musica.artista.nome}">Artista</td>
                     
                     <!-- Coluna "Ações" HTML -->
                     <td>
-                        <a th:href="@{/musica/editar/{cod_musica}(cod_musica=${musica.cod_musica})}" class="btn btnEditar">Editar</a>
+                        <a th:href="@{/musica/editar/{codigo}(codigo=${musica.codigo})}" class="btn btnEditar">Editar<i class='bx bxs-edit-alt'></i></a>
                         
-                        <form th:action="@{/musica/excluir/{cod_musica}(cod_musica=${musica.cod_musica})}" method="post" 
+                        <form th:action="@{/musica/excluir/{codigo}(codigo=${musica.codigo})}" method="post" 
                         th:onsubmit="return confirm('Tem certeza que deseja excluir?');" style="display:inline;">
                         <button type="submit" class="btn btnExcluir">Excluir<i class='bx bxs-volume-mute'></i></button>
                     </form>
                 </td>
+
             </tr>
         </tbody>
     </table>
+
+    <div class="actions">
+        <!-- Botão que levará o usuário para a página de criação de músicas -->        
+        <a href="#" th:href="@{/musica/novo}" class="btnAdd">Adicionar uma nova música</a> <br><br>
+    </div>
+
     </div>
     <!-- <div class="retorno">
         <a href="#" th:href="@{/}" class="btn btnVoltar">Acessar CRUD Usuários</a> <br><br>

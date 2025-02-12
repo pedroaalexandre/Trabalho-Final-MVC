@@ -4,18 +4,17 @@ import java.util.List;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import br.iftm.edu.tspi.pmvc.projeto_crud.domain.Artista;
 import br.iftm.edu.tspi.pmvc.projeto_crud.domain.Genero;
 import br.iftm.edu.tspi.pmvc.projeto_crud.repository.ArtistaRepository;
 import br.iftm.edu.tspi.pmvc.projeto_crud.repository.GeneroRepository;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import org.springframework.web.bind.annotation.PostMapping;
 
 
 @Controller
@@ -45,15 +44,15 @@ public class ArtistaController {
         return URL_LISTA;
     }
 
-    @GetMapping("/buscar")
-    public String buscarPorNome(@RequestParam("nome") String nome, Model model) {
-        List<Artista> artistaBusca = artistaRepository.buscarPorNome(nome);
-        model.addAttribute(ATRIBUTO_LISTA, artistaBusca);
-        if(artistaBusca.isEmpty()) {
-            model.addAttribute(ATRIBUTO_MENSAGEM, nome + " não encontrado.");
-        }
-        return URL_LISTA;
-    }
+    // @GetMapping("/buscar")
+    // public String buscarPorNome(@RequestParam("nome") String nome, Model model) {
+    //     List<Artista> artistaBusca = artistaRepository.buscarPorNome(nome);
+    //     model.addAttribute(ATRIBUTO_LISTA, artistaBusca);
+    //     if(artistaBusca.isEmpty()) {
+    //         model.addAttribute(ATRIBUTO_MENSAGEM, nome + " não encontrado.");
+    //     }
+    //     return URL_LISTA;
+    // }
 
     @GetMapping("/novo")
     public String abrirFormNovo(Model model) {

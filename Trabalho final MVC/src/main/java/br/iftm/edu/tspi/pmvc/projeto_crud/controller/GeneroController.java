@@ -4,17 +4,15 @@ import java.util.List;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import br.iftm.edu.tspi.pmvc.projeto_crud.domain.Genero;
 import br.iftm.edu.tspi.pmvc.projeto_crud.repository.GeneroRepository;
-import org.springframework.web.bind.annotation.PostMapping;
-
-
 
 @Controller
 @RequestMapping("/genero")
@@ -46,8 +44,7 @@ public class GeneroController {
         Genero genero = new Genero();
         model.addAttribute(ATRIBUTO_OBJETO, genero);
         return URL_FORM;
-    }
-    
+    }    
 
     @GetMapping("/editar/{codigo}")
     public String formEditarGenero(@PathVariable("codigo") Integer codigo, Model model, RedirectAttributes redirectAttributes) {
@@ -59,16 +56,14 @@ public class GeneroController {
             model.addAttribute(ATRIBUTO_OBJETO, generoBusca);
             return URL_FORM;
         }
-    }
-    
+    }    
 
     @PostMapping("/criar")
     public String salvar(@ModelAttribute("genero") Genero genero, RedirectAttributes redirectAttributes) {
         repository.novo(genero);
         redirectAttributes.addFlashAttribute(ATRIBUTO_MENSAGEM, genero.getDescricao() + " salvo com sucesso!");
         return URL_REDIRECT_INICIAL;
-    }
-    
+    }    
 
     @PostMapping("/editar/{codigo}")
     public String atualizar(@PathVariable("codigo") Integer codigo, @ModelAttribute ("genero") Genero genero, RedirectAttributes redirectAttributes) {
@@ -85,8 +80,6 @@ public class GeneroController {
         repository.delete(codigo);
         redirectAttributes.addFlashAttribute(ATRIBUTO_MENSAGEM, "Gênero excluído com sucesso!");
         return URL_REDIRECT_INICIAL;
-    }
-    
-    
+    }  
     
 }

@@ -1,22 +1,22 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <head>
-     <title th:text="${musica.cod_musica != null ? 'Editar Música' : 'Nova Música'}">Formulário de música</title>
+     <title th:text="${musica.codigo != null ? 'Editar Música' : 'Nova Música'}">Formulário de música</title>
      <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-     <link th:href="@{/css/styles.css}" rel="stylesheet"> 
+     <link th:href="@{/css/stylesArtCriar.css}" rel="stylesheet"> 
 </head>
 <body>
      <div class="wrapper">
 
-          <h1 th:text="${musica.cod_musica != null ? 'Editar Música' : 'Nova Música'}">Formulário de música</h1>
+          <h1 th:text="${musica.codigo != null ? 'Editar Música' : 'Nova Música'}">Formulário de música</h1>
 
           <div th:if="${mensagem}" class="mensagem-servidor">
                <p th:text="${mensagem}"></p>
           </div>
 
-          <form class="formulario" th:action="@{${musica.cod_musica != null ? '/musica/editar/' + musica.cod_musica : '/musica/novo'}}" th:object="${musica}" method="post">
+          <form class="formulario" th:action="@{${musica.codigo != null ? '/musica/editar/' + musica.codigo : '/musica/novo'}}" th:object="${musica}" method="post">
                <div class="input-box">
-                    <input type="number" th:field="*{cod_musica}" placeholder="Código" required th:readonly="true">
+                    <input type="number" th:field="*{codigo}" placeholder="Código" required th:readonly="true">
                     <i class='bx bx-qr' ></i>
                </div>
 
@@ -25,7 +25,7 @@
                </div>
                
                <div class="input-box">
-                    <input type="number" id="anoLanc" min="1860" max="2024" th:field="*{ano_lancamento}" placeholder="Ano de lançamento" required>
+                    <input type="number" id="anoLanc" min="1860" max="2024" th:field="*{anoLancamento}" placeholder="Ano de lançamento" required>
                     <i class='bx bx-qr' ></i>
                </div>
                
@@ -33,13 +33,27 @@
                     <input type="text" id="duracao" th:field="*{duracao}" placeholder="Duração em minutos" required>
                     <i class='bx bx-qr' ></i>
                </div>
+               
+               <div class="input-select">
+                    <select id="artista" name="artista" th:field="*{artista.codigo}" placeholder="Artista" required>
+                        <option value="" disabled selected >Selecione <i class='bx bxs-music'></i></option>
+                        <option th:each="artista : ${artistas}"
+                              th:value="${artista.codigo}"
+                              th:text="${artista.nome}" style="color: rgb(37, 37, 37);">
+                        </option>
+                    </select>
+               </div>
 
-               <div class="input-box">
+               <!-- <div class="input-box">
                     <input type="text" id="artista" th:field="*{artista}" placeholder="Artista" required>
                     <i class='bx bx-qr' ></i>
-               </div>
+               </div> -->
                
-               <button type="submit" class="btn" th:text="${musica.cod_musica != null ? 'Atualizar' : 'Salvar'}" required>Salvar/Atulizar</button>
+               <button type="submit" class="btn" th:text="${musica.codigo != null ? 'Atualizar' : 'Salvar'}" required>Salvar/Atulizar</button>
+               
+               <div class="register-link">
+                    <p><a th:href="@{/musica/listar}" class="register-link">Voltar</a></p>
+                </div>
           </form>
      </div>
 </body>

@@ -2,38 +2,38 @@ package br.iftm.edu.tspi.pmvc.projeto_crud.domain;
 
 public class Musica {
      
-     private Integer cod_musica;
+     private Integer codigo;
      private String titulo; 
-     private int ano_lancamento; 
+     private int anoLancamento; 
      private String duracao;
-     private String artista;
+     private Artista artista;
 
      public Musica() {
      }
 
-     public Musica(Integer cod_musica) {
-          this.cod_musica = cod_musica;
+     public Musica(Integer codigo) {
+          this.codigo = codigo;
      }
 
-     public Musica(Integer cod_musica, String titulo) {
-          this.cod_musica = cod_musica;
+     public Musica(Integer codigo, String titulo) {
+          this.codigo = codigo;
           this.titulo = titulo;
      }
 
-     public Musica(Integer cod_musica, String titulo, int ano_lancamento, String duracao, String artista) {
-          this.cod_musica = cod_musica;
+     public Musica(Integer codigo, String titulo, int anoLancamento, String duracao, Artista artista) {
+          this.codigo = codigo;
           this.titulo = titulo;
-          this.ano_lancamento = ano_lancamento;
+          this.anoLancamento = anoLancamento;
           this.duracao = duracao;
           this.artista = artista;
      }
 
-     public Integer getCod_musica() {
-          return cod_musica;
+     public Integer getCodigo() {
+          return codigo;
      }
 
-     public void setCod_musica(Integer cod_musica) {
-          this.cod_musica = cod_musica;
+     public void setCodigo(Integer codigo) {
+          this.codigo = codigo;
      }
 
      public String getTitulo() {
@@ -44,12 +44,12 @@ public class Musica {
           this.titulo = titulo;
      }
 
-     public int getAno_lancamento() {
-          return ano_lancamento;
+     public int getAnoLancamento() {
+          return anoLancamento;
      }
 
-     public void setAno_lancamento(int ano_lancamento) {
-          this.ano_lancamento = ano_lancamento;
+     public void setAnoLancamento(int anoLancamento) {
+          this.anoLancamento = anoLancamento;
      }
 
      public String getDuracao() {
@@ -60,11 +60,11 @@ public class Musica {
           this.duracao = duracao;
      }
 
-     public String getArtista() {
+     public Artista getArtista() {
           return artista;
      }
 
-     public void setArtista(String artista) {
+     public void setArtista(Artista artista) {
           this.artista = artista;
      }
 
@@ -72,7 +72,7 @@ public class Musica {
      public int hashCode() {
           final int prime = 31;
           int result = 1;
-          result = prime * result + ((cod_musica == null) ? 0 : cod_musica.hashCode());
+          result = prime * result + ((codigo == null) ? 0 : codigo.hashCode());
           return result;
      }
 
@@ -85,10 +85,10 @@ public class Musica {
           if (getClass() != obj.getClass())
                return false;
           Musica other = (Musica) obj;
-          if (cod_musica == null) {
-               if (other.cod_musica != null)
+          if (codigo == null) {
+               if (other.codigo != null)
                     return false;
-          } else if (!cod_musica.equals(other.cod_musica))
+          } else if (!codigo.equals(other.codigo))
                return false;
           return true;
      }   
