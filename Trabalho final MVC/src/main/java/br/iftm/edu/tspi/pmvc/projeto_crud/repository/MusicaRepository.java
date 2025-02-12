@@ -2,7 +2,6 @@ package br.iftm.edu.tspi.pmvc.projeto_crud.repository;
 
 import java.util.List;
 
-import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -58,18 +57,39 @@ public class MusicaRepository {
 
      public Musica buscaPorCodigo(Integer codigo) {
           String sql = """
-                    select cod_musica,  
-                         titulo, 
-                         ano_lancamento, 
-                         duracao, 
-                         artista
-                    from musica
-                    where codigo = ?
-                    """;
-          return conexaoBanco.queryForObject(sql, 
-               new BeanPropertyRowMapper<>(Musica.class),
-               codigo);
-     }
+              select m.cod_musica,  
+                     m.titulo, 
+                     m.ano_lancamento, 
+                     m.duracao, 
+                     a.cod_artista,
+                     a.nome_artista,
+                     g.cod_genero,
+                     g.desc_genero
+              from musica m
+              join artista a on a.cod_artista = m.cod_artista
+              join genero g on g.cod_genero = a.cod_genero
+              where m.cod_musica = ?
+          """;
+          return conexaoBanco.queryForObject(sql, (rs, rowNum) -> {
+              Musica musica = new Musica();
+              musica.setCodigo(rs.getInt("cod_musica"));
+              musica.setTitulo(rs.getString("titulo"));
+              musica.setAnoLancamento(rs.getInt("ano_lancamento"));
+              musica.setDuracao(rs.getString("duracao"));
+      
+              Genero genero = new Genero();
+              genero.setCodigo(rs.getInt("cod_genero"));
+              genero.setDescricao(rs.getString("desc_genero"));
+      
+              Artista artista = new Artista();
+              artista.setCodigo(rs.getInt("cod_artista"));
+              artista.setNome(rs.getString("nome_artista"));
+              artista.setGenero(genero);
+      
+              musica.setArtista(artista);
+              return musica;
+          }, codigo);
+      }
 
      public void novo(Musica musica) {
           String sql = "insert into musica(titulo, ano_lancamento, duracao, cod_artista) values (?, ?, ?, ?)";
@@ -86,12 +106,12 @@ public class MusicaRepository {
      }
 
      public boolean update(Musica musica) {
-          String sql = "update musica set titulo = ?, ano_lancamento = ?, duracao = ?, artista = ? where codigo = ?";
+          String sql = "update musica set titulo = ?, ano_lancamento = ?, duracao = ?, cod_artista = ? where cod_musica = ?";
           return conexaoBanco.update(sql,
                musica.getTitulo(),
                musica.getAnoLancamento(),
                musica.getDuracao(),
-               musica.getArtista(), 
+               musica.getArtista().getCodigo(), 
                musica.getCodigo()) > 0;
-     }     
+      }
 }

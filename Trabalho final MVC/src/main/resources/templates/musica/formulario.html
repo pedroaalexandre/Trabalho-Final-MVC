@@ -16,32 +16,28 @@
 
           <form class="formulario" th:action="@{${musica.codigo != null ? '/musica/editar/' + musica.codigo : '/musica/novo'}}" th:object="${musica}" method="post">
                <div class="input-box">
-                    <input type="number" th:field="*{codigo}" placeholder="Código" required th:readonly="true">
-                    <i class='bx bx-qr' ></i>
-               </div>
-
-               <div class="input-box">
-                     <input type="text" id="titulo"  name="name" th:field="*{titulo}" placeholder="Digite o nome da música" required>
+                     <input type="text" id="titulo"  name="name" th:field="*{titulo}" placeholder="Nome" required>
+                     <i class='bx bx-music'></i>
                </div>
                
                <div class="input-box">
-                    <input type="number" id="anoLanc" min="1860" max="2024" th:field="*{anoLancamento}" placeholder="Ano de lançamento" required>
-                    <i class='bx bx-qr' ></i>
+                    <input type="number" id="anoLanc" th:field="*{anoLancamento}" min="1860" max="2025" placeholder="Ano de lançamento" required>
+                    <i class='bx bx-calendar'></i>
                </div>
                
                <div class="input-box">
                     <input type="text" id="duracao" th:field="*{duracao}" placeholder="Duração em minutos" required>
-                    <i class='bx bx-qr' ></i>
+                    <i class='bx bx-time'></i>
                </div>
                
                <div class="input-select">
                     <select id="artista" name="artista" th:field="*{artista.codigo}" placeholder="Artista" required>
-                        <option value="" disabled selected >Selecione <i class='bx bxs-music'></i></option>
+                         <option value="" disabled selected >Selecione <i class='bx bxs-microphone'></i></option>
                         <option th:each="artista : ${artistas}"
-                              th:value="${artista.codigo}"
-                              th:text="${artista.nome}" style="color: rgb(37, 37, 37);">
-                        </option>
-                    </select>
+                        th:value="${artista.codigo}"
+                        th:text="${artista.nome}" style="color: rgb(37, 37, 37);">
+                    </option>
+               </select>
                </div>
 
                <!-- <div class="input-box">
