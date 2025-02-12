@@ -1,5 +1,14 @@
 package br.iftm.edu.tspi.pmvc.projeto_crud.domain;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+@AllArgsConstructor
+@NoArgsConstructor
+@Setter
+@Getter
 public class Usuario {
 
     private String login;
@@ -7,51 +16,6 @@ public class Usuario {
     private String nome;
     private Integer codigo;
 
-    public Usuario(){
-    }
-
-    public Usuario(String login) {
-        this.login = login;
-    }
-
-    public Usuario(String login, String senha, String nome, Integer codigo) {
-        this.login = login;
-        this.senha = senha;
-        this.nome = nome;
-        this.codigo = codigo;
-    }
-
-    public String getLogin() {
-        return login;
-    }
-
-    public void setLogin(String login) {
-        this.login = login;
-    }
-
-    public String getSenha() {
-        return senha;
-    }
-
-    public void setSenha(String senha) {
-        this.senha = senha;
-    }
-
-    public String getNome() {
-        return nome;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
-    public Integer getCodigo() {
-        return codigo;
-    }
-
-    public void setCodigo(Integer codigo) {
-        this.codigo = codigo;
-    }
 
     @Override
     public int hashCode() {

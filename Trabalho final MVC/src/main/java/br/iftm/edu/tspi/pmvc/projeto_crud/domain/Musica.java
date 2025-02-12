@@ -1,5 +1,14 @@
 package br.iftm.edu.tspi.pmvc.projeto_crud.domain;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter
+@Setter
 public class Musica {
      
      private Integer codigo;
@@ -8,65 +17,6 @@ public class Musica {
      private String duracao;
      private Artista artista;
 
-     public Musica() {
-     }
-
-     public Musica(Integer codigo) {
-          this.codigo = codigo;
-     }
-
-     public Musica(Integer codigo, String titulo) {
-          this.codigo = codigo;
-          this.titulo = titulo;
-     }
-
-     public Musica(Integer codigo, String titulo, int anoLancamento, String duracao, Artista artista) {
-          this.codigo = codigo;
-          this.titulo = titulo;
-          this.anoLancamento = anoLancamento;
-          this.duracao = duracao;
-          this.artista = artista;
-     }
-
-     public Integer getCodigo() {
-          return codigo;
-     }
-
-     public void setCodigo(Integer codigo) {
-          this.codigo = codigo;
-     }
-
-     public String getTitulo() {
-          return titulo;
-     }
-
-     public void setTitulo(String titulo) {
-          this.titulo = titulo;
-     }
-
-     public int getAnoLancamento() {
-          return anoLancamento;
-     }
-
-     public void setAnoLancamento(int anoLancamento) {
-          this.anoLancamento = anoLancamento;
-     }
-
-     public String getDuracao() {
-          return duracao;
-     }
-
-     public void setDuracao(String duracao) {
-          this.duracao = duracao;
-     }
-
-     public Artista getArtista() {
-          return artista;
-     }
-
-     public void setArtista(Artista artista) {
-          this.artista = artista;
-     }
 
      @Override
      public int hashCode() {

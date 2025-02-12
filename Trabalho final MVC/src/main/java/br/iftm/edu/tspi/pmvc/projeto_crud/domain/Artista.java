@@ -1,56 +1,20 @@
 package br.iftm.edu.tspi.pmvc.projeto_crud.domain;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter
+@Setter
 public class Artista {
     private Integer codigo;
     private String nome;
     private Integer idade;
     private Genero genero;
 
-    public Artista(){
-    }
-    
-    public Artista(Integer codigo) {
-        this.codigo = codigo;
-    }
-
-    public Artista(Integer codigo, String nome, Integer idade, Genero genero) {
-        this.codigo = codigo;
-        this.nome = nome;
-        this.idade = idade;
-        this.genero = genero;
-    }
-
-    public Integer getCodigo() {
-        return codigo;
-    }
-
-    public void setCodigo(Integer codigo) {
-        this.codigo = codigo;
-    }
-
-    public String getNome() {
-        return nome;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
-    public Integer getIdade() {
-        return idade;
-    }
-
-    public void setIdade(Integer idade) {
-        this.idade = idade;
-    }
-
-    public Genero getGenero() {
-        return genero;
-    }
-
-    public void setGenero(Genero genero) {
-        this.genero = genero;
-    }
 
     @Override
     public int hashCode() {

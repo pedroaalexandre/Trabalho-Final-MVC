@@ -1,56 +1,20 @@
 package br.iftm.edu.tspi.pmvc.projeto_crud.domain;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+@AllArgsConstructor
+@NoArgsConstructor
+@Setter
+@Getter
 public class Genero {
     private Integer codigo;
     private String descricao;
     private String data;
     private String pais;
 
-    public Genero() {
-    }
-
-    public Genero(Integer codigo){
-        this.codigo = codigo;
-    }
-
-    public Genero(Integer codigo, String descricao, String data, String pais) {
-        this.codigo = codigo;
-        this.descricao = descricao;
-        this.data = data;
-        this.pais = pais;
-    }
-
-    public Integer getCodigo() {
-        return codigo;
-    }
-
-    public void setCodigo(Integer codigo) {
-        this.codigo = codigo;
-    }
-
-    public String getDescricao() {
-        return descricao;
-    }
-
-    public void setDescricao(String descricao) {
-        this.descricao = descricao;
-    }
-
-    public String getData() {
-        return data;
-    }
-
-    public void setData(String data) {
-        this.data = data;
-    }
-
-    public String getPais() {
-        return pais;
-    }
-
-    public void setPais(String pais) {
-        this.pais = pais;
-    }
 
     @Override
     public int hashCode() {
