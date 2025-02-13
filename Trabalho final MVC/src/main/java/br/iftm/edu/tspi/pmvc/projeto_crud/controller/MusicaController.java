@@ -86,8 +86,8 @@ public class MusicaController {
             return URL_REDIRECT_LISTA;
         }else{
             model.addAttribute(ATRIBUTO_OBJETO, musicaBusca);
-            List<Musica> musicas = musicaRepository.listar();
-            model.addAttribute("musicas", musicas);
+            List<Artista> artistas = artistaRepository.listar();
+            model.addAttribute("artistas", artistas);
             return URL_FORM;
         }
     }

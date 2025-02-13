@@ -3,7 +3,8 @@
 <head>
      <title th:text="${musica.codigo != null ? 'Editar Música' : 'Nova Música'}">Formulário de música</title>
      <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-     <link th:href="@{/css/stylesArtCriar.css}" rel="stylesheet"> 
+     <link th:href="@{/css/stylesArtCriar.css}" rel="stylesheet">
+     <title th:text="${musica.codigo != null ? 'Editar Musica' : 'Adicionar Musica'}">Editar Música</title> 
 </head>
 <body>
      <div class="wrapper">
@@ -31,11 +32,11 @@
                </div>
                
                <div class="input-select">
-                    <select id="artista" name="artista" th:field="*{artista.codigo}" placeholder="Artista" required>
+                    <select id="artista" name="artista" th:field="*{artista.codigo}" placeholder="Artista">
                          <option value="" disabled selected >Selecione <i class='bx bxs-microphone'></i></option>
-                        <option th:each="artista : ${artistas}"
-                        th:value="${artista.codigo}"
-                        th:text="${artista.nome}" style="color: rgb(37, 37, 37);">
+                         <option th:each="artista : ${artistas}"
+                                 th:value="${artista.codigo}"
+                                 th:text="${artista.nome}" style="color: rgb(37, 37, 37);">
                     </option>
                </select>
                </div>
