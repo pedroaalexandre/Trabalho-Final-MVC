@@ -13,15 +13,19 @@
     
             <form th:action="@{${artista.codigo != null ? '/artista/editar/' + artista.codigo : '/artista/novo'}}" th:object="${artista}" method="post">
                 <h1 th:text="${artista.codigo != null ? 'Atualizar artista' : 'Adicionar artista'}">Atualizar</h1>
+                <!-- Campo Nome -->
                 <div class="input-box">
                     <input type="text" th:field="*{nome}" placeholder="Nome" required>
                     <i class='bx bxs-music'></i>
                 </div>
+
+                <!-- Campo Data de Nascimento -->
                 <div class="input-box">
-                    <input type="text" th:field="*{idade}" placeholder="Idade" required>
+                    <input type="date" th:field="*{dataNascimento}" required>
                     <i class='bx bxs-calendar'></i>
                 </div>
                 
+                <!-- Campo Genero -->
                 <div class="input-select">
                     <select id="genero" name="genero" th:field="*{genero.codigo}">
                         <option value="" disabled selected >Selecione <i class='bx bxs-music'></i></option>
@@ -32,8 +36,10 @@
                     </select>
                 </div>
                 
+                <!-- Botão de Envio -->
                 <button type="submit" class="btn" th:text="${artista.codigo != null ? 'Editar' : 'Adicionar'}"required>Salvar/Atulizar</button>
 
+                <!-- Link para voltar -->
                 <div class="register-link">
                     <p><a th:href="@{/artista}" class="register-link">Voltar</a></p>
                 </div>

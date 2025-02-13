@@ -1,5 +1,8 @@
 package br.iftm.edu.tspi.pmvc.projeto_crud.domain;
 
+import java.time.LocalDate;
+import java.time.Period;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -12,9 +15,16 @@ import lombok.Setter;
 public class Artista {
     private Integer codigo;
     private String nome;
-    private Integer idade;
+    private LocalDate dataNascimento;
     private Genero genero;
 
+    // Método que retorna a idade do artista
+    public int getIdade() {
+        if (dataNascimento == null) {
+            return 0;
+        }
+        return Period.between(dataNascimento, LocalDate.now()).getYears();
+    }
 
     @Override
     public int hashCode() {

@@ -1,5 +1,6 @@
 package br.iftm.edu.tspi.pmvc.projeto_crud.repository;
 
+import java.sql.Date;
 import java.util.List;
 
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -77,28 +78,30 @@ public class ArtistaRepository {
 
     public List<Artista> listar() {
         String sql = """
-                    select cod_artista,
-                            nome_artista,
-                            idade_artista,
-                            g.desc_genero,
-                            g.cod_genero
-                    from artista a, genero g
-                    where g.cod_genero = a.cod_genero
-                    order by a.cod_artista
-                    """;
+                SELECT 
+                    a.cod_artista,
+                    a.nome_artista,
+                    a.data_nascimento, 
+                    TIMESTAMPDIFF(YEAR, a.data_nascimento, CURDATE()) AS idade,
+                    g.cod_genero,
+                    g.desc_genero
+                FROM artista a
+                JOIN genero g ON g.cod_genero = a.cod_genero
+                ORDER BY a.cod_artista
+                """;
         return conexaoBanco.query(sql, (rs, rowNum) -> {
                 Artista artista = new Artista();
                 artista.setCodigo(rs.getInt("cod_artista"));
                 artista.setNome(rs.getString("nome_artista"));
-                artista.setIdade(rs.getInt("idade_artista"));
-
+                artista.setDataNascimento(rs.getDate("data_nascimento").toLocalDate()); // Corrigido
+                
                 Genero genero = new Genero();
                 genero.setCodigo(rs.getInt("cod_genero"));
                 genero.setDescricao(rs.getString("desc_genero"));
-
+                
                 artista.setGenero(genero);
                 return artista;
-        });
+                });
     }
 
     // public Artista geArtista(ResultSet rs) throws SQLException {
@@ -121,7 +124,8 @@ public class ArtistaRepository {
         String sql = """
                     select cod_artista,
                             nome_artista,
-                            idade_artista,
+                            a.data_nascimento, 
+                            TIMESTAMPDIFF(YEAR, a.data_nascimento, CURDATE()) AS idade,
                             a.cod_genero,
                             g.desc_genero,
                             g.ano_surgimento,
@@ -133,7 +137,7 @@ public class ArtistaRepository {
                 Artista artista = new Artista();
                 artista.setCodigo(rs.getInt("cod_artista"));
                 artista.setNome(rs.getString("nome_artista"));
-                artista.setIdade(rs.getInt("idade_artista"));
+                artista.setDataNascimento(rs.getDate("data_nascimento").toLocalDate());
 
                 Genero genero = new Genero();
                 genero.setCodigo(rs.getInt("cod_genero"));
@@ -148,29 +152,28 @@ public class ArtistaRepository {
 
     public void novo(Artista artista) {
         String sql = """
-                insert into artista
-                (cod_artista, nome_artista, idade_artista, cod_genero)
-                values(?,?,?,?)
+                INSERT INTO artista
+                (nome_artista, data_nascimento, cod_genero)
+                VALUES (?,?,?)
                 """;
-
+    
         conexaoBanco.update(sql,    
-                            artista.getCodigo(),
                             artista.getNome(),
-                            artista.getIdade(),
+                            Date.valueOf(artista.getDataNascimento()), 
                             artista.getGenero().getCodigo());
-    }
+    }    
 
     public boolean update(Artista artista) {
         String sql = """
                 update artista
                 set nome_artista = ?,
-                    idade_artista = ?,
+                    data_nascimento = ?,
                     cod_genero = ?
                 where cod_artista = ?
                 """;
         return conexaoBanco.update(sql,    
                 artista.getNome(),
-                artista.getIdade(),
+                artista.getDataNascimento() != null ? Date.valueOf(artista.getDataNascimento()) : null,
                 artista.getGenero().getCodigo(), artista.getCodigo()) > 0;
     }
 
@@ -183,7 +186,8 @@ public class ArtistaRepository {
         String sql = """
                     select cod_artista,
                             nome_artista,
-                            idade_artista,
+                            a.data_nascimento, 
+                            TIMESTAMPDIFF(YEAR, a.data_nascimento, CURDATE()) AS idade,
                             a.cod_genero,
                             g.desc_genero,
                             g.ano_surgimento,
@@ -195,7 +199,7 @@ public class ArtistaRepository {
                 Artista artista = new Artista();
                 artista.setCodigo(rs.getInt("cod_artista"));
                 artista.setNome(rs.getString("nome_artista"));
-                artista.setIdade(rs.getInt("idade_artista"));
+                artista.setDataNascimento(rs.getDate("data_nascimento").toLocalDate());
 
                 Genero genero = new Genero();
                 genero.setCodigo(rs.getInt("cod_genero"));

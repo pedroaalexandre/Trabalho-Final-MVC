@@ -20,6 +20,7 @@
             <thead>
                 <th>Cód.</th>
                 <th>Nome</th>
+                <th>Data de Nascimento</th>
                 <th>Idade</th>
                 <th>Gênero Musical</th>
             </thead>
@@ -27,6 +28,7 @@
                 <tr th:each="artista : ${artistas}">
                     <td th:text="${artista.codigo}">Código</td>
                     <td th:text="${artista.nome}">Nome</td>
+                    <td th:text="${artista.dataNascimento}">Idade</td>
                     <td th:text="${artista.idade}">Idade</td>
                     <td th:text="${artista.genero.descricao}">Gênero Musical</td>
                     <td>
