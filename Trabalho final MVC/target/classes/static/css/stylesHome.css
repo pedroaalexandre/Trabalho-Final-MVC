@@ -1,0 +1,48 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background: #121212;
+    color: white;
+}
+header {
+    background: #1DB954;
+    padding: 20px;
+    text-align: center;
+}
+nav ul {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+nav a {
+    color: white;
+    text-decoration: none;
+}
+.destaques {
+    text-align: center;
+    padding: 20px;
+}
+.banner {
+    background: #333;
+    padding: 50px;
+    border-radius: 10px;
+}
+.lista-musicas {
+    padding: 20px;
+}
+.filtros {
+    margin-bottom: 10px;
+}
+ul {
+    list-style: none;
+    padding: 0;
+}
+.musica {
+    background: #222;
+    margin: 5px 0;
+    padding: 10px;
+    border-radius: 5px;
+}

@@ -9,64 +9,6 @@ import org.springframework.stereotype.Repository;
 import br.iftm.edu.tspi.pmvc.projeto_crud.domain.Artista;
 import br.iftm.edu.tspi.pmvc.projeto_crud.domain.Genero;
 
-// @Repository
-// public class ArtistaRepository {
-
-//     private final List<Artista> artistas;
-
-//     public ArtistaRepository() {
-
-//         this.artistas = new ArrayList<>();
-
-//         Genero gospel = new Genero(1, "Gospel", "Século XX", "Estados Unidos");
-
-//         this.artistas.add(new Artista(1, "Alessandro Vilas Boas", 29, gospel));
-//     }
-
-//     public List<Artista> listar() {
-//         return this.artistas;
-//     }
-
-//     public List<Artista> buscarPorNome(String nome) {
-//         List<Artista> artistaBusca = new ArrayList<>();
-//         for (Artista artista: this.artistas) {
-//             if(artista.getNome().toLowerCase().contains(nome.toLowerCase())) {
-//                 artistaBusca.add(artista);
-//             }
-//         }
-//         return artistaBusca;
-//     }
-
-//     public Artista buscarPorCodigo(Integer codigo) {
-//         Artista artistaBusca = new Artista(codigo);
-//         int index = artistas.indexOf(artistaBusca);
-        
-//         if(index != -1) {
-//             return artistas.get(index);
-//         }else{
-//             return null;
-//         }
-//     }
-
-//     public void novo(Artista artista) {
-//         artistas.add(artista);
-//     }
-
-//     public boolean delete(Integer codigo) {
-//         Artista artista = new Artista(codigo);
-//         return artistas.remove(artista);
-//     }
-
-//     public boolean update(Artista artista) {
-//         int index = artistas.indexOf(artista);
-//         if(index != -1) {
-//             artistas.set(index, artista);
-//             return true;
-//         }
-//         return false;
-//     }
-// }
-
 @Repository
 public class ArtistaRepository {
     

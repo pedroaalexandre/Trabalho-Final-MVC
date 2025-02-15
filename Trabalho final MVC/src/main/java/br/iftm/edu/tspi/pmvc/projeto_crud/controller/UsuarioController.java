@@ -4,15 +4,15 @@ import java.util.List;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import br.iftm.edu.tspi.pmvc.projeto_crud.domain.Usuario;
 import br.iftm.edu.tspi.pmvc.projeto_crud.repository.UsuarioRepository;
-import org.springframework.web.bind.annotation.PostMapping;
 
 
 
@@ -67,8 +67,7 @@ public class UsuarioController {
             model.addAttribute(ATRIBUTO_OBJETO, usuarioBusca);
             return URL_FORM;
         }
-    }
-    
+    }    
 
     @PostMapping("/usuario/cadastro")
     public String salvar(@ModelAttribute("usuario") Usuario usuario, RedirectAttributes redirectAttributes) {
