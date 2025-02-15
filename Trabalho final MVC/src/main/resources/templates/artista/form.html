@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-    <link rel="stylesheet" th:href="@{/css/stylesArtCriar.css}">
+    <link rel="stylesheet" th:href="@{/css/stylesForm.css}">
     <title th:text="${artista.codigo != null ? 'Editar Artista' : 'Adicionar Artista'}">Editar Atista</title>
 </head>
 <body>
@@ -22,7 +22,7 @@
                 <!-- Campo Data de Nascimento -->
                 <div class="input-box">
                     <input type="date" th:field="*{dataNascimento}" required>
-                    <i class='bx bxs-calendar'></i>
+                    <!-- <i class='bx bxs-calendar'></i> -->
                 </div>
                 
                 <!-- Campo Genero -->

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" th:href="@{/css/stylesHome.css}">
+    <title>Home - Streaming de Música</title>
+</head>
+<body>
+    <header th:insert="~{fragments/menu :: menu}"></header>
+    <main>
+        <section class="destaques">
+            <h2>Destaques</h2>
+            <div class="banner">
+                <p>Música em alta agora!</p>
+            </div>
+        </section>
+        <section class="lista-musicas">
+            <h2>Lista de Músicas</h2>
+            <div class="filtros">
+                <label for="genero">Filtrar por gênero:</label>
+                <select id="genero">
+                    <option value="todos">Todos</option>
+                    <option th:each="genero : ${generos}" th:value="${genero.codigo}" th:text="${genero.descricao}"></option>
+                </select>
+            </div>
+            <ul id="musicas">
+                <li th:each="musica : ${musicas}" class="musica" th:attr="data-genero=${musica.artista.genero.codigo}" th:text="${musica.titulo}"></li>
+            </ul>
+        </section>
+    </main>
+    <!-- <script>
+     //    document.getElementById('genero').addEventListener('change', function() {
+     //        let generoSelecionado = this.value;
+     //        document.querySelectorAll('.musica').forEach(musica => {
+     //            musica.style.display = generoSelecionado === 'todos' || musica.getAttribute('data-genero') === generoSelecionado ? 'block' : 'none';
+     //        });
+     //    });
+    </script> -->
+</body>
+</html>

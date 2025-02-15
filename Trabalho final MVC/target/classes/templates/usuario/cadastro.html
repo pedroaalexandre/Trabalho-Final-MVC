@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-    <link th:href="@{/css/styles.css}" rel="stylesheet">
+    <link th:href="@{/css/stylesForm.css}" rel="stylesheet">
     <title th:text="${usuario.login != null ? 'Editar' : 'Cadastro'}">Cadastro</title>
 </head>
 
@@ -13,10 +13,6 @@
 
         <form th:action="@{${usuario.login != null ? '/usuario/editar/' + usuario.login : '/usuario/cadastro'}}" th:object="${usuario}" method="post">
             <h1 th:text="${usuario.login != null ? 'Editar' : 'Cadastro'}">Cadastro</h1>
-            <div class="input-box">
-                <input type="number" th:field="*{codigo}" placeholder="Código de usuário" th:readonly="true">
-                <i class='bx bx-qr' ></i>
-            </div>
             <div class="input-box">
                 <input type="text" th:field="*{nome}" placeholder="Nome" required>
                 <i class='bx bx-rename' ></i>
