@@ -23,7 +23,8 @@ public class MusicaRepository {
                     select m.cod_musica, 
                          m.titulo,
                          m.ano_lancamento,
-                         m.duracao, 
+                         m.duracao,
+                         m.imagem,
                          a.cod_artista,
                          a.nome_artista,
                          a.cod_genero,
@@ -39,6 +40,7 @@ public class MusicaRepository {
           musica.setTitulo(rs.getString("titulo"));
           musica.setAnoLancamento(rs.getInt("ano_lancamento"));
           musica.setDuracao(rs.getString("duracao"));
+          musica.setImagem(rs.getString("imagem"));
 
           Genero genero = new Genero();
           genero.setCodigo(rs.getInt("cod_genero"));
@@ -60,7 +62,8 @@ public class MusicaRepository {
               select m.cod_musica,  
                      m.titulo, 
                      m.ano_lancamento, 
-                     m.duracao, 
+                     m.duracao,
+                     m.imagem,
                      a.cod_artista,
                      a.nome_artista,
                      g.cod_genero,
@@ -76,6 +79,7 @@ public class MusicaRepository {
               musica.setTitulo(rs.getString("titulo"));
               musica.setAnoLancamento(rs.getInt("ano_lancamento"));
               musica.setDuracao(rs.getString("duracao"));
+              musica.setImagem(rs.getString("imagem"));
       
               Genero genero = new Genero();
               genero.setCodigo(rs.getInt("cod_genero"));
@@ -91,14 +95,16 @@ public class MusicaRepository {
           }, codigo);
       }
 
-     public void novo(Musica musica) {
-          String sql = "insert into musica(titulo, ano_lancamento, duracao, cod_artista) values (?, ?, ?, ?)";
+      public void novo(Musica musica) {
+          String sql = "INSERT INTO musica (titulo, ano_lancamento, duracao, cod_artista, imagem) VALUES (?, ?, ?, ?, ?)";
           conexaoBanco.update(sql, 
               musica.getTitulo(),
               musica.getAnoLancamento(),
               musica.getDuracao(),
-              musica.getArtista().getCodigo());
-     }
+              musica.getArtista().getCodigo(),
+              musica.getImagem()
+          );
+      }
 
      public boolean delete(Integer codigo) {
           String sql = "delete from musica where cod_musica = ?";
@@ -106,12 +112,53 @@ public class MusicaRepository {
      }
 
      public boolean update(Musica musica) {
-          String sql = "update musica set titulo = ?, ano_lancamento = ?, duracao = ?, cod_artista = ? where cod_musica = ?";
+          String sql = "UPDATE musica SET titulo = ?, ano_lancamento = ?, duracao = ?, cod_artista = ?, imagem = ? WHERE cod_musica = ?";
           return conexaoBanco.update(sql,
-               musica.getTitulo(),
-               musica.getAnoLancamento(),
-               musica.getDuracao(),
-               musica.getArtista().getCodigo(), 
-               musica.getCodigo()) > 0;
+              musica.getTitulo(),
+              musica.getAnoLancamento(),
+              musica.getDuracao(),
+              musica.getArtista().getCodigo(),
+              musica.getImagem(),
+              musica.getCodigo()) > 0;
       }
+
+      public List<Musica> listarPorGenero(Integer codGenero) {
+          String sql = """
+              SELECT m.cod_musica, 
+                     m.titulo,
+                     m.ano_lancamento,
+                     m.duracao,
+                     m.imagem,
+                     a.cod_artista,
+                     a.nome_artista,
+                     a.cod_genero,
+                     g.desc_genero
+              FROM musica m
+              JOIN artista a ON a.cod_artista = m.cod_artista
+              JOIN genero g ON g.cod_genero = a.cod_genero
+              WHERE g.cod_genero = ?
+          """;
+      
+          return conexaoBanco.query(sql, (rs, rowNum) -> {
+              Musica musica = new Musica();
+              musica.setCodigo(rs.getInt("cod_musica"));
+              musica.setTitulo(rs.getString("titulo"));
+              musica.setAnoLancamento(rs.getInt("ano_lancamento"));
+              musica.setDuracao(rs.getString("duracao"));
+              musica.setImagem(rs.getString("imagem"));
+      
+              Genero genero = new Genero();
+              genero.setCodigo(rs.getInt("cod_genero"));
+              genero.setDescricao(rs.getString("desc_genero"));
+      
+              Artista artista = new Artista();
+              artista.setCodigo(rs.getInt("cod_artista"));
+              artista.setNome(rs.getString("nome_artista"));
+              artista.setGenero(genero);
+      
+              musica.setArtista(artista);
+              return musica;
+          }, codGenero);
+      }
+      
 }

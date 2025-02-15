@@ -3,10 +3,16 @@
 <body>
         <nav th:fragment="menu">
             <ul>
-                <li><a th:href="@{/home}">Home</a></li>
+                <li><a th:href="@{/home}">                    Home
+                </a></li>
                 <li><a th:href="@{/artista}">Artistas</a></li>
                 <li><a th:href="@{/genero/listaGeneros}">Gêneros</a></li>
                 <li><a th:href="@{/musica/listar}">Músicas</a></li>
+            </ul>
+            <div id="logo">
+                <h1>MatchMusic</h1>
+            </div>
+            <ul>
                 <li><a th:href="@{/}">Sair</a></li>
             </ul>
         </nav>

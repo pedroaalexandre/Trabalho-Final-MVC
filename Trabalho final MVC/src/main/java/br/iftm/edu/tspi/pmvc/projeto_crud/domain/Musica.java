@@ -16,6 +16,7 @@ public class Musica {
      private Integer anoLancamento;
      private String duracao;
      private Artista artista;
+     private String imagem;
 
 
      @Override

@@ -1,4 +1,4 @@
-body {
+/* body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
@@ -45,4 +45,160 @@ ul {
     margin: 5px 0;
     padding: 10px;
     border-radius: 5px;
+} */
+
+
+/*----------------------------------------------------*/
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+* {
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+}
+
+body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    background: url(../img/fundo_azul.jpg);
+    background-size: cover;
+    background-position: center;
+}
+
+body::-webkit-scrollbar {
+    width: 8px;               /* width of the entire scrollbar */
+}
+  
+body::-webkit-scrollbar-track {
+    background: black;        /* color of the tracking area */
+}
+  
+body::-webkit-scrollbar-thumb {
+    background-color: rgb(179, 176, 176);    /* color of the scroll thumb */
+    border-radius: 20px;       /* roundness of the scroll thumb */
+}
+
+.destaques > h2 {
+    font-size: 40px;
+    color: white;
+}
+
+.destaques {
+    width: 1500px;
+    background-color: transparent;
+    border: 2px solid rgba(255, 255, 255, .2);
+    backdrop-filter: blur(40px);
+    box-shadow: 0 0 10px rgba(0, 0, 0, .2);
+    color: #ffffff;
+    border-radius: 10px;
+    padding: 30px 40px;
+    text-align: center;
+    margin-top: 80px;
+}
+
+.destaques .lista-musica > ul {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    list-style: none;
+    gap: 30px;
+}
+
+.banner {
+    width: 200px;
+    height: 300px;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid rgba(255, 255, 255, .5);
+    border-radius: 10px;
+    padding: 50px;
+    padding-bottom: 15px;
+    margin: 20px 20px 20px 20px;
+    background-color: rgba(0, 0, 0, .2);
+}
+
+.banner > div > p:nth-of-type(2) {
+    font-size: 13px;
+    color: rgba(255, 255, 255, .8);
+}
+
+.info {
+    margin-top: 50px;
+}
+
+/* NAVBAR FRAGMENT */
+
+header{
+    position: fixed;
+    top: 0;
+    width: 100%;
+    border: 0px;
+    z-index: 1000;
+}
+
+header > nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: rgb(0, 0, 0);
+    width: 100%;
+    padding: 0 20px;
+}
+
+header > nav > #logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-grow: 1; /* Permite que o logo ocupe o espaço restante */
+}
+
+header > nav > #logo h1 {
+    color: white;
+    font-size: 20px;
+    font-weight: 600;
+    text-decoration: none;
+    border: 0px;
+}
+
+header > nav > ul {
+    display: flex;
+    flex-direction: row;
+    padding: 15px 0;
+}
+
+header > nav > ul:first-child {
+    justify-content: flex-start; /* Alinha o primeiro ul à esquerda */
+}
+
+header > nav > ul:last-child {
+    justify-content: flex-end; /* Alinha o último ul à direita */
+}
+
+header > nav > ul > li {
+    list-style: none;
+    border: 0px;
+}
+
+header > nav > ul > li > a:link, a:visited{
+    color: white;
+    text-decoration: none;
+    padding: 16px 30px;
+    border: 0px;
+    transition: ease-in-out, 0.3s;
+}
+
+header > nav > ul > li > a:hover{
+    color: black;
+    background-color: white;
+    text-decoration: none;
+}
+
+/* Não excluir FELIPE está mexendo*/
+nav ul li img {
+    width: 1ch; 
+    height: auto;
 }

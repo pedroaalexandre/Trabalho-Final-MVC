@@ -1,42 +1,118 @@
-<!DOCTYPE html>
+                                                                                                                                                                                                                                                                                                                                    <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" th:href="@{/css/stylesHome.css}">
-    <title>Home - Streaming de Música</title>
+    <title>MatchMusic</title>
 </head>
 <body>
+
     <header th:insert="~{fragments/menu :: menu}"></header>
+
     <main>
         <section class="destaques">
             <h2>Destaques</h2>
-            <div class="banner">
-                <p>Música em alta agora!</p>
+            <div class="lista-musica">
+                <ul id="musicas">
+                    <li th:each="musica, stat : ${musicas}" th:if="${stat.index < 5}" class="musica">
+                        <div class="banner">
+                            <img th:src="@{'/uploads/musicas/' + ${musica.imagem}}" alt="Imagem da Música" width="100">
+                            <div class="info">
+                                <p th:text="${musica.titulo}"></p>
+                                <p th:text="${musica.artista.nome}"></p>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>            
+        </section>
+
+        <div class="filtros">
+            <div class="filtros">
+                <form id="filterForm" th:action="@{/home/filtrar}" method="get">
+                    <label for="genero">Filtrar por gênero:</label>
+                    <select id="genero" name="genero" onchange="document.getElementById('filterForm').submit()">
+                        <option value="">Todos</option>
+                        <option th:each="genero : ${generos}" 
+                                th:value="${genero.codigo}" 
+                                th:text="${genero.descricao}"
+                                th:selected="${genero.codigo == generoSelecionado}">
+                        </option>
+                    </select>
+                </form>
+            </div>                
+        </div>
+
+        <!-- <section class="lista-musicas">
+            <h2>Lista de Músicas</h2>
+            <ul id="musicas">
+                <li th:each="musica : ${musicas}" class="musica">
+                    <img th:src="@{'/uploads/musicas/' + ${musica.imagem}}" alt="Imagem da Música" width="100">
+                    <div class="info">
+                        <p th:text="${musica.titulo}"></p>
+                        <p th:text="${musica.artista.nome}"></p>
+                    </div>
+                </li>
+            </ul> -->
+        </section>
+
+        <!-- <section class="destaques">
+            <h3>Rock</h3>
+            <div class="lista-musica">
+                <ul id="musicas-rock">
+                    <li th:each="musica : ${musicasRock}" class="musica">
+                        <div class="banner">
+                            <img th:src="@{'/uploads/musicas/' + ${musica.imagem}}" alt="Imagem da Música" width="100">
+                            <div class="info">
+                                <p th:text="${musica.titulo}"></p>
+                                <p th:text="${musica.artista.nome}"></p>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
             </div>
         </section>
-        <section class="lista-musicas">
-            <h2>Lista de Músicas</h2>
-            <div class="filtros">
-                <label for="genero">Filtrar por gênero:</label>
-                <select id="genero">
-                    <option value="todos">Todos</option>
-                    <option th:each="genero : ${generos}" th:value="${genero.codigo}" th:text="${genero.descricao}"></option>
-                </select>
+        <section class="destaques">
+            <h3>Pop</h3>
+            <div class="lista-musica">
+                <ul id="musicas-rock">
+                    <li th:each="musica : ${musicasPop}" class="musica">
+                        <div class="banner">
+                            <img th:src="@{'/uploads/musicas/' + ${musica.imagem}}" alt="Imagem da Música" width="100">
+                            <div class="info">
+                                <p th:text="${musica.titulo}"></p>
+                                <p th:text="${musica.artista.nome}"></p>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
             </div>
-            <ul id="musicas">
-                <li th:each="musica : ${musicas}" class="musica" th:attr="data-genero=${musica.artista.genero.codigo}" th:text="${musica.titulo}"></li>
-            </ul>
+        </section> -->
+        <section class="destaques" th:each="genero : ${generos}">
+            <h3 th:text="${genero.descricao}"></h3>
+            <div class="lista-musica">
+                <ul th:id="'musicas-' + ${genero.descricao.toLowerCase()}">
+                    <li th:each="musica : ${musicasPorGenero[genero.descricao]}" class="musica">
+                        <div class="banner">
+                            <img th:src="@{'/uploads/musicas/' + ${musica.imagem}}" alt="Imagem da Música" width="100">
+                            <div class="info">
+                                <p th:text="${musica.titulo}"></p>
+                                <p th:text="${musica.artista.nome}"></p>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
         </section>
     </main>
-    <!-- <script>
-     //    document.getElementById('genero').addEventListener('change', function() {
-     //        let generoSelecionado = this.value;
-     //        document.querySelectorAll('.musica').forEach(musica => {
-     //            musica.style.display = generoSelecionado === 'todos' || musica.getAttribute('data-genero') === generoSelecionado ? 'block' : 'none';
-     //        });
-     //    });
-    </script> -->
+
+    <script>
+        function filtrarPorGenero() {
+            let generoSelecionado = document.getElementById("genero").value;
+            window.location.href = `/home/filtrar?genero=${generoSelecionado}`;
+        }
+    </script>
 </body>
 </html>

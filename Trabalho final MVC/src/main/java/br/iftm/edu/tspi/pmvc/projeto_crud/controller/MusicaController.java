@@ -1,6 +1,12 @@
 package br.iftm.edu.tspi.pmvc.projeto_crud.controller;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
+import java.util.UUID;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -8,11 +14,14 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import br.iftm.edu.tspi.pmvc.projeto_crud.domain.Artista;
 import br.iftm.edu.tspi.pmvc.projeto_crud.domain.Musica;
 import br.iftm.edu.tspi.pmvc.projeto_crud.repository.ArtistaRepository;
+import br.iftm.edu.tspi.pmvc.projeto_crud.repository.GeneroRepository;
 import br.iftm.edu.tspi.pmvc.projeto_crud.repository.MusicaRepository;
 
 @Controller
@@ -21,6 +30,7 @@ public class MusicaController {
 
     private final ArtistaRepository artistaRepository;
     private final MusicaRepository musicaRepository;
+    private final GeneroRepository generoRepository;
 
     public static final String URL_LISTA = "musica/listaMusica";
     public static final String URL_FORM = "musica/formulario";
@@ -30,9 +40,14 @@ public class MusicaController {
     public static final String ATRIBUTO_OBJETO = "musica";
     public static final String ATRIBUTO_LISTA = "musicas";
 
-    public MusicaController(MusicaRepository musicaRepository, ArtistaRepository artistaRepository) {
+    // Injeção de dependência para o diretório de upload
+    @Value("${upload.dir}") // Diretório configurado no application.properties
+    private String uploadDir;
+
+    public MusicaController(MusicaRepository musicaRepository, ArtistaRepository artistaRepository, GeneroRepository generoRepository) {
         this.musicaRepository = musicaRepository;
         this.artistaRepository = artistaRepository;
+        this.generoRepository = generoRepository;
     }
 
     // Será acessado para listar as músicas cadastradas;
@@ -65,19 +80,6 @@ public class MusicaController {
         return URL_FORM;
     }
 
-    // Utilizado para abrir um formulário para a edição de um música já cadastrada;
-    // @GetMapping("/editar/{codigo}")
-    // public String abrirFormEditar(@PathVariable("codigo") Integer codigo, Model model, RedirectAttributes redirectAttributes) {   
-    //     Musica musicaBusca = musicaRepository.buscaPorCodigo(codigo);
-    //     if (musicaBusca == null) {
-    //         redirectAttributes.addFlashAttribute(ATRIBUTO_MENSAGEM, codigo + "não encontrado.");
-    //         return URL_REDIRECT_LISTA;
-    //     } else {
-    //         model.addAttribute(ATRIBUTO_OBJETO, musicaBusca);
-    //         return URL_FORM;
-    //     }
-    // } 
-
     @GetMapping("/editar/{codigo}")
     public String abrirFormEditar(@PathVariable("codigo") Integer codigo, Model model, RedirectAttributes redirectAttributes) {
         Musica musicaBusca = musicaRepository.buscaPorCodigo(codigo);
@@ -94,11 +96,30 @@ public class MusicaController {
 
     // Utilizado para realizar uma requição de criação de uma nova música e inclui-la as informações na listagem;
     @PostMapping("/novo")
-    public String salvar(@ModelAttribute("musica") Musica musica, RedirectAttributes redirectAttributes) {
-        musicaRepository.novo(musica);
-        redirectAttributes.addFlashAttribute(ATRIBUTO_MENSAGEM, "Música " + musica.getTitulo() + " adicionado com sucesso!");        
+    public String salvar(@ModelAttribute("musica") Musica musica,
+                        @RequestParam("imagemFile") MultipartFile imagemFile, 
+                        RedirectAttributes redirectAttributes) {
+
+        // Verifica se um arquivo foi enviado
+        if (!imagemFile.isEmpty()) {
+            try {
+                // Gera um nome único para evitar conflitos
+                String nomeArquivo = UUID.randomUUID() + "_" + imagemFile.getOriginalFilename();
+                Path caminhoArquivo = Paths.get(uploadDir, nomeArquivo);
+                Files.write(caminhoArquivo, imagemFile.getBytes());
+
+                musica.setImagem(nomeArquivo); // Salva o nome da imagem
+            } catch (IOException e) {
+                redirectAttributes.addFlashAttribute("mensagem", "Erro ao salvar a imagem.");
+                return "redirect:/musica/novo";
+            }
+        }
+
+        musicaRepository.novo(musica); // 🔵 Agora a música já tem a imagem antes de ser salva no banco
+
+        redirectAttributes.addFlashAttribute(ATRIBUTO_MENSAGEM, "Música " + musica.getTitulo() + " adicionada com sucesso!");        
         return URL_REDIRECT_LISTA;
-    }   
+    }
     
     // Utilizado para realizar uma requição de atualização de uma música já criada e enviar as informações para a listagem;
     @PostMapping("/editar/{codigo}")
@@ -118,5 +139,4 @@ public class MusicaController {
         redirectAttributes.addFlashAttribute(ATRIBUTO_MENSAGEM, " Música excluída com sucesso!");    
         return URL_REDIRECT_LISTA;
     }
-
 }

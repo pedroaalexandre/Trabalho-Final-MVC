@@ -4,13 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-    <link rel="stylesheet" th:href="@{/css/styles.css}">
+    <link rel="stylesheet" th:href="@{/css/stylesLogin.css}">
     <title>Login</title>
 </head>
 
 <body>
     <div class="wrapper">
 
+        <!-- <form action="#" th:action="@{/home}" method="post" id="formLogin"> -->
         <form action="">
             <h1>Login</h1>
 
@@ -19,22 +20,38 @@
             </div>
 
             <div class="input-box">
-                <input type="text" placeholder="Usuário" required>
+                <input type="text" placeholder="Usuário" required id="userLogin">
                 <i class='bx bxs-user'></i>
             </div>
             <div class="input-box">
-                <input type="password" placeholder="Senha" required>
+                <input type="password" placeholder="Senha" required id="userPassword">
                 <i class='bx bxs-lock-alt' ></i>
             </div>
             
             <!-- <button type="submit" class="btn">Login</button> -->
         </form>
-        <a href="#" th:href="@{/home}" class="btn">Login</a>
+        <!-- <input type="button" value="Login" class="btn" id="btnLogin"> -->
+        <a href="#" th:href="@{/home}" class="btn" id="btnLogin">Login</a>
         <div class="register-link">
             <p>Não tem uma conta? <a href="#" th:href="@{/usuario/cadastro}">Cadastre-se</a></p>
             <p>Lista de cadastros - <a href="#" th:href="@{/usuario/lista}">Editar cadastros</a></p>
         </div>
-    </div>    
+    </div>
+    
+    <!-- <script>
+        userLogin = document.getElementById("userLogin")
+        userPassword = document.getElementById("userPassword")
+        btnLogin = document.getElementById("btnLogin")
+        formLogin = document.getElementById("formLogin")
+
+        btnLogin.addEventListener("click", function(){
+            if (userLogin.value.length === 0 || userPassword.value.length ===0){
+                alert("Usuário ou senha inválido")
+            }else
+                formLogin.submit();
+        })
+
+    </script> -->
 </body>
 
 </html>
