@@ -1,56 +1,5 @@
-/* body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    background: #121212;
-    color: white;
-}
-header {
-    background: #1DB954;
-    padding: 20px;
-    text-align: center;
-}
-nav ul {
-    list-style: none;
-    padding: 0;
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-}
-nav a {
-    color: white;
-    text-decoration: none;
-}
-.destaques {
-    text-align: center;
-    padding: 20px;
-}
-.banner {
-    background: #333;
-    padding: 50px;
-    border-radius: 10px;
-}
-.lista-musicas {
-    padding: 20px;
-}
-.filtros {
-    margin-bottom: 10px;
-}
-ul {
-    list-style: none;
-    padding: 0;
-}
-.musica {
-    background: #222;
-    margin: 5px 0;
-    padding: 10px;
-    border-radius: 5px;
-} */
-
-
-/*----------------------------------------------------*/
-
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
 
 * {
     margin: 0px;
@@ -98,6 +47,7 @@ body::-webkit-scrollbar-thumb {
     padding: 30px 40px;
     text-align: center;
     margin-top: 80px;
+    overflow: hidden;
 }
 
 .destaques .lista-musica > ul {
@@ -109,16 +59,27 @@ body::-webkit-scrollbar-thumb {
 }
 
 .banner {
-    width: 200px;
-    height: 300px;
+    height: 350px;
     display: flex;
     flex-direction: column;
+    align-items: center;
     border: 1px solid rgba(255, 255, 255, .5);
     border-radius: 10px;
-    padding: 50px;
+    padding: 40px;
     padding-bottom: 15px;
-    margin: 20px 20px 20px 20px;
+    margin: 20px 18px;
     background-color: rgba(0, 0, 0, .2);
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.banner:hover {
+    transform: scale(1.05);
+    
+}
+
+.banner > img {
+    width: 120%;
+    border-radius: 10px;
 }
 
 .banner > div > p:nth-of-type(2) {
@@ -127,78 +88,26 @@ body::-webkit-scrollbar-thumb {
 }
 
 .info {
-    margin-top: 50px;
+    margin: 30px 0 20px 0;
 }
 
-/* NAVBAR FRAGMENT */
-
-header{
-    position: fixed;
-    top: 0;
-    width: 100%;
-    border: 0px;
-    z-index: 1000;
+/* CARROSSEL */
+.swiper-container {
+    width: 55vh;
+    padding: 20px 0;
 }
 
-header > nav {
+.swiper-slide {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-color: rgb(0, 0, 0);
-    width: 100%;
-    padding: 0 20px;
-}
-
-header > nav > #logo {
-    display: flex;
-    align-items: center;
     justify-content: center;
-    flex-grow: 1; /* Permite que o logo ocupe o espaço restante */
+    align-items: center;
+    border-radius: 10px;
 }
 
-header > nav > #logo h1 {
-    color: white;
-    font-size: 20px;
-    font-weight: 600;
-    text-decoration: none;
-    border: 0px;
+.swiper-button-next, .swiper-button-prev {
+    color: rgb(255, 255, 255); /* Cor das setas */
 }
 
-header > nav > ul {
-    display: flex;
-    flex-direction: row;
-    padding: 15px 0;
-}
-
-header > nav > ul:first-child {
-    justify-content: flex-start; /* Alinha o primeiro ul à esquerda */
-}
-
-header > nav > ul:last-child {
-    justify-content: flex-end; /* Alinha o último ul à direita */
-}
-
-header > nav > ul > li {
-    list-style: none;
-    border: 0px;
-}
-
-header > nav > ul > li > a:link, a:visited{
-    color: white;
-    text-decoration: none;
-    padding: 16px 30px;
-    border: 0px;
-    transition: ease-in-out, 0.3s;
-}
-
-header > nav > ul > li > a:hover{
-    color: black;
-    background-color: white;
-    text-decoration: none;
-}
-
-/* Não excluir FELIPE está mexendo*/
-nav ul li img {
-    width: 1ch; 
-    height: auto;
+.swiper-pagination {
+    bottom: 10px;
 }

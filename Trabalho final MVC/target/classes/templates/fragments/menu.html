@@ -1,17 +1,23 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" th:href="@{/css/stylesMenu.css}">
+    <title>MatchMusic</title>
+</head>
 <body>
         <nav th:fragment="menu">
             <ul>
-                <li><a th:href="@{/home}">                    Home
-                </a></li>
+                <li>
+                    <a th:href="@{/home}" class="imagem"></a>
+                    <!-- <h1>MatchMusic</h1> -->
+                </li>
                 <li><a th:href="@{/artista}">Artistas</a></li>
                 <li><a th:href="@{/genero/listaGeneros}">Gêneros</a></li>
                 <li><a th:href="@{/musica/listar}">Músicas</a></li>
             </ul>
-            <div id="logo">
-                <h1>MatchMusic</h1>
-            </div>
             <ul>
                 <li><a th:href="@{/}">Sair</a></li>
             </ul>

@@ -4,7 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+
     <link rel="stylesheet" th:href="@{/css/stylesHome.css}">
+    <link rel="stylesheet" th:href="@{/css/stylesMenu.css}">
+    <!-- Swiper CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.css">
+    <!-- Swiper JS -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
+
     <title>MatchMusic</title>
 </head>
 <body>
@@ -45,6 +52,8 @@
             </div>                
         </div>
 
+        <img src="uploads/musicas/2.png" alt="">
+
         <!-- <section class="lista-musicas">
             <h2>Lista de Músicas</h2>
             <ul id="musicas">
@@ -57,44 +66,11 @@
                 </li>
             </ul> -->
         </section>
-
-        <!-- <section class="destaques">
-            <h3>Rock</h3>
-            <div class="lista-musica">
-                <ul id="musicas-rock">
-                    <li th:each="musica : ${musicasRock}" class="musica">
-                        <div class="banner">
-                            <img th:src="@{'/uploads/musicas/' + ${musica.imagem}}" alt="Imagem da Música" width="100">
-                            <div class="info">
-                                <p th:text="${musica.titulo}"></p>
-                                <p th:text="${musica.artista.nome}"></p>
-                            </div>
-                        </div>
-                    </li>
-                </ul>
-            </div>
-        </section>
-        <section class="destaques">
-            <h3>Pop</h3>
-            <div class="lista-musica">
-                <ul id="musicas-rock">
-                    <li th:each="musica : ${musicasPop}" class="musica">
-                        <div class="banner">
-                            <img th:src="@{'/uploads/musicas/' + ${musica.imagem}}" alt="Imagem da Música" width="100">
-                            <div class="info">
-                                <p th:text="${musica.titulo}"></p>
-                                <p th:text="${musica.artista.nome}"></p>
-                            </div>
-                        </div>
-                    </li>
-                </ul>
-            </div>
-        </section> -->
         <section class="destaques" th:each="genero : ${generos}">
             <h3 th:text="${genero.descricao}"></h3>
-            <div class="lista-musica">
-                <ul th:id="'musicas-' + ${genero.descricao.toLowerCase()}">
-                    <li th:each="musica : ${musicasPorGenero[genero.descricao]}" class="musica">
+            <div class="swiper-container" th:id="'swiper-' + ${genero.codigo}">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide musica" th:each="musica : ${musicasPorGenero[genero.codigo]}">
                         <div class="banner">
                             <img th:src="@{'/uploads/musicas/' + ${musica.imagem}}" alt="Imagem da Música" width="100">
                             <div class="info">
@@ -102,8 +78,13 @@
                                 <p th:text="${musica.artista.nome}"></p>
                             </div>
                         </div>
-                    </li>
-                </ul>
+                    </div>
+                </div>
+                <!-- Botões de Navegação -->
+                <div class="swiper-button-next"></div>
+                <div class="swiper-button-prev"></div>
+                <!-- Paginação -->
+                <div class="swiper-pagination"></div>
             </div>
         </section>
     </main>
@@ -113,6 +94,28 @@
             let generoSelecionado = document.getElementById("genero").value;
             window.location.href = `/home/filtrar?genero=${generoSelecionado}`;
         }
+
+        document.addEventListener("DOMContentLoaded", function () {
+        document.querySelectorAll('.swiper-container').forEach(swiperElement => {
+            new Swiper('#' + swiperElement.id, {
+                slidesPerView: 5, // Quantas músicas aparecem por vez
+                spaceBetween: 10, // Espaço entre os cards
+                loop: true, // Loop infinito
+                navigation: {
+                    nextEl: '#' + swiperElement.id + ' .swiper-button-next',
+                    prevEl: '#' + swiperElement.id + ' .swiper-button-prev'
+                },
+                pagination: {
+                    el: '#' + swiperElement.id + ' .swiper-pagination',
+                    clickable: true
+                },
+                breakpoints: {
+                    768: { slidesPerView: 2 },
+                    480: { slidesPerView: 1 }
+                }
+            });
+        });
+    });
     </script>
 </body>
 </html>
