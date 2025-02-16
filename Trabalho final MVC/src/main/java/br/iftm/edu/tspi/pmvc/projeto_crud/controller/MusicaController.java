@@ -40,6 +40,8 @@ public class MusicaController {
     public static final String ATRIBUTO_OBJETO = "musica";
     public static final String ATRIBUTO_LISTA = "musicas";
 
+    public static final String IMAGEM_PADRAO = "musica.webp";
+
     // Injeção de dependência para o diretório de upload
     @Value("${upload.dir}") // Diretório configurado no application.properties
     private String uploadDir;
@@ -97,11 +99,11 @@ public class MusicaController {
     // Utilizado para realizar uma requição de criação de uma nova música e inclui-la as informações na listagem;
     @PostMapping("/novo")
     public String salvar(@ModelAttribute("musica") Musica musica,
-                        @RequestParam("imagemFile") MultipartFile imagemFile, 
+                        @RequestParam(value = "imagemFile", required = false) MultipartFile imagemFile, 
                         RedirectAttributes redirectAttributes) {
 
         // Verifica se um arquivo foi enviado
-        if (!imagemFile.isEmpty()) {
+        if (imagemFile != null && !imagemFile.isEmpty()) {
             try {
                 // Gera um nome único para evitar conflitos
                 String nomeArquivo = UUID.randomUUID() + "_" + imagemFile.getOriginalFilename();
@@ -113,6 +115,8 @@ public class MusicaController {
                 redirectAttributes.addFlashAttribute("mensagem", "Erro ao salvar a imagem.");
                 return "redirect:/musica/novo";
             }
+        }else{
+            musica.setImagem(IMAGEM_PADRAO);
         }
 
         musicaRepository.novo(musica); // 🔵 Agora a música já tem a imagem antes de ser salva no banco
@@ -121,16 +125,49 @@ public class MusicaController {
         return URL_REDIRECT_LISTA;
     }
     
-    // Utilizado para realizar uma requição de atualização de uma música já criada e enviar as informações para a listagem;
+    // // Utilizado para realizar uma requição de atualização de uma música já criada e enviar as informações para a listagem;
+    // @PostMapping("/editar/{codigo}")
+    // public String editar(@PathVariable("codigo") Integer codigo, @ModelAttribute("codigo") Musica musica, RedirectAttributes redirectAttributes) {
+    //     if (musicaRepository.update(musica)){
+    //         redirectAttributes.addFlashAttribute(ATRIBUTO_MENSAGEM, musica.getTitulo() + " atualizado com sucesso");
+    //     } else {
+    //         redirectAttributes.addFlashAttribute(ATRIBUTO_MENSAGEM, "Não foi possível atualizar "+ musica.getTitulo());
+    //     }
+    //     return URL_REDIRECT_LISTA;
+    // }
+
     @PostMapping("/editar/{codigo}")
-    public String editar(@PathVariable("codigo") Integer codigo, @ModelAttribute("codigo") Musica musica, RedirectAttributes redirectAttributes) {
-        if (musicaRepository.update(musica)){
-            redirectAttributes.addFlashAttribute(ATRIBUTO_MENSAGEM, musica.getTitulo() + " atualizado com sucesso");
-        } else {
-            redirectAttributes.addFlashAttribute(ATRIBUTO_MENSAGEM, "Não foi possível atualizar "+ musica.getTitulo());
-        }
-        return URL_REDIRECT_LISTA;
-    } 
+        public String editar(@PathVariable("codigo") Integer codigo, 
+                            @ModelAttribute("codigo") Musica musica, 
+                            @RequestParam(value = "imagemFile", required = false) MultipartFile imagemFile, 
+                            @RequestParam(value = "imagemExistente", required = false) String imagemExistente,
+                            RedirectAttributes redirectAttributes) {
+
+            // Verifica se um novo arquivo de imagem foi enviado
+            if (imagemFile != null && !imagemFile.isEmpty()) {
+                try {
+                    // Gera um nome único para evitar conflitos
+                    String nomeArquivo = UUID.randomUUID() + "_" + imagemFile.getOriginalFilename();
+                    Path caminhoArquivo = Paths.get(uploadDir, nomeArquivo);
+                    Files.write(caminhoArquivo, imagemFile.getBytes());
+
+                    musica.setImagem(nomeArquivo); // Salva o nome da nova imagem
+                } catch (IOException e) {
+                    redirectAttributes.addFlashAttribute("mensagem", "Erro ao salvar a nova imagem.");
+                    return "redirect:/musica/editar/" + codigo;
+                }
+            } else {
+                // Mantém a imagem existente
+                musica.setImagem(imagemExistente);
+            }
+
+            if (musicaRepository.update(musica)) {
+                redirectAttributes.addFlashAttribute(ATRIBUTO_MENSAGEM, musica.getTitulo() + " atualizado com sucesso");
+            } else {
+                redirectAttributes.addFlashAttribute(ATRIBUTO_MENSAGEM, "Não foi possível atualizar " + musica.getTitulo());
+            }
+            return URL_REDIRECT_LISTA;
+    }
 
     // Utilizado para realizar a exclusão de uma música e removê-la da listagem;
     @PostMapping(value = "/excluir/{codigo}")

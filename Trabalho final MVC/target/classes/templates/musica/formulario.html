@@ -46,6 +46,8 @@
                     <i class='bx bx-qr' ></i>
                </div> -->
                
+               <input type="hidden" name="imagemExistente" th:value="${musica.imagem}">
+
                <button type="submit" class="btn" th:text="${musica.codigo != null ? 'Atualizar' : 'Salvar'}" required>Salvar/Atulizar</button>
                
                <div class="register-link">
