@@ -36,35 +36,9 @@
             </div>            
         </section>
 
-        <div class="filtros">
-            <div class="filtros">
-                <form id="filterForm" th:action="@{/home/filtrar}" method="get">
-                    <label for="genero">Filtrar por gênero:</label>
-                    <select id="genero" name="genero" onchange="document.getElementById('filterForm').submit()">
-                        <option value="">Todos</option>
-                        <option th:each="genero : ${generos}" 
-                                th:value="${genero.codigo}" 
-                                th:text="${genero.descricao}"
-                                th:selected="${genero.codigo == generoSelecionado}">
-                        </option>
-                    </select>
-                </form>
-            </div>                
-        </div>
 
         <img src="uploads/musicas/2.png" alt="">
-
-        <!-- <section class="lista-musicas">
-            <h2>Lista de Músicas</h2>
-            <ul id="musicas">
-                <li th:each="musica : ${musicas}" class="musica">
-                    <img th:src="@{'/uploads/musicas/' + ${musica.imagem}}" alt="Imagem da Música" width="100">
-                    <div class="info">
-                        <p th:text="${musica.titulo}"></p>
-                        <p th:text="${musica.artista.nome}"></p>
-                    </div>
-                </li>
-            </ul> -->
+        
         </section>
         <section class="destaques" th:each="genero : ${generos}">
             <h3 th:text="${genero.descricao}"></h3>
@@ -90,32 +64,28 @@
     </main>
 
     <script>
-        function filtrarPorGenero() {
-            let generoSelecionado = document.getElementById("genero").value;
-            window.location.href = `/home/filtrar?genero=${generoSelecionado}`;
-        }
-
+        // Inicializa o Swiper
         document.addEventListener("DOMContentLoaded", function () {
         document.querySelectorAll('.swiper-container').forEach(swiperElement => {
             new Swiper('#' + swiperElement.id, {
-                slidesPerView: 5, // Quantas músicas aparecem por vez
-                spaceBetween: 10, // Espaço entre os cards
-                loop: true, // Loop infinito
-                navigation: {
-                    nextEl: '#' + swiperElement.id + ' .swiper-button-next',
-                    prevEl: '#' + swiperElement.id + ' .swiper-button-prev'
-                },
-                pagination: {
-                    el: '#' + swiperElement.id + ' .swiper-pagination',
-                    clickable: true
-                },
-                breakpoints: {
-                    768: { slidesPerView: 2 },
-                    480: { slidesPerView: 1 }
-                }
+            slidesPerView: 5, // Quantas músicas aparecem por vez
+            spaceBetween: 10, // Espaço entre os cards
+            loop: true, // Loop infinito
+            navigation: {
+                nextEl: '#' + swiperElement.id + ' .swiper-button-next',
+                prevEl: '#' + swiperElement.id + ' .swiper-button-prev'
+            },
+            pagination: {
+                el: '#' + swiperElement.id + ' .swiper-pagination',
+                clickable: true
+            },
+            breakpoints: {
+                768: { slidesPerView: 2 },
+                480: { slidesPerView: 1 }
+            }
             });
         });
-    });
+        });
     </script>
 </body>
 </html>

@@ -10,8 +10,6 @@
 
 <body>
     <div class="wrapper">
-
-        <!-- <form action="#" th:action="@{/home}" method="post" id="formLogin"> -->
         <form method="post" action="/usuario/login">
             <h1>Login</h1>
 
@@ -32,24 +30,8 @@
 
         <div class="register-link">
             <p>Não tem uma conta? <a href="#" th:href="@{/usuario/cadastro}">Cadastre-se</a></p>
-            <p>Lista de cadastros - <a href="#" th:href="@{/usuario/lista}">Editar cadastros</a></p>
         </div>
     </div>
-    
-    <!-- <script>
-        userLogin = document.getElementById("userLogin")
-        userPassword = document.getElementById("userPassword")
-        btnLogin = document.getElementById("btnLogin")
-        formLogin = document.getElementById("formLogin")
-
-        btnLogin.addEventListener("click", function(){
-            if (userLogin.value.length === 0 || userPassword.value.length ===0){
-                alert("Usuário ou senha inválido")
-            }else
-                formLogin.submit();
-        })
-
-    </script> -->
 </body>
 
 </html>

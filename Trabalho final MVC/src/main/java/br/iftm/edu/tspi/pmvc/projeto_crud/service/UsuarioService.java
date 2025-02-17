@@ -26,4 +26,9 @@ public class UsuarioService {
             return false;
         }
     }
+
+    public void salvar(Usuario login) {
+        login.setSenha(encoder.encode(login.getSenha()));
+        repository.salvar(login);
+    }
 }

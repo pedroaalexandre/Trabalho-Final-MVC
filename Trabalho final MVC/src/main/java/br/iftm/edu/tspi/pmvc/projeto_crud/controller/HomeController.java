@@ -27,25 +27,6 @@ public class HomeController {
         this.generoRepository = generoRepository;
     }
 
-    // @GetMapping
-    // public String home(Model model) {
-    //     List<Musica> musicas = musicaRepository.listar();
-    //     List<Genero> generos = generoRepository.listar();
-
-    //     List<Musica> musicasRock = musicaRepository.listarPorGenero(1); // Gênero Rock (1)
-    //     List<Musica> musicasPop = musicaRepository.listarPorGenero(2); // Gênero Pop (2)
-    //     List<Musica> musicasJazz = musicaRepository.listarPorGenero(3); // Gênero Jazz (3)
-        
-    //     model.addAttribute("musicasRock", musicasRock);
-    //     model.addAttribute("musicasPop", musicasPop);
-    //     model.addAttribute("musicasJazz", musicasJazz);
-
-    //     model.addAttribute("musicas", musicas);
-    //     model.addAttribute("generos", generos);
-
-    //     return "home/home";
-    // }
-
     @GetMapping
     public String home(Model model) {
         // Listar todas as músicas e gêneros
@@ -68,21 +49,4 @@ public class HomeController {
         return "home/home";
     }
 
-    @GetMapping("/filtrar")
-    public String filtrarPorGenero(@RequestParam(value = "genero", required = false) Integer codGenero, Model model) {
-        List<Musica> musicas;
-
-        if (codGenero == null || codGenero == 0) {
-            musicas = musicaRepository.listar(); // Se não houver filtro, lista todas as músicas
-        } else {
-            musicas = musicaRepository.listarPorGenero(codGenero); // Filtra pelo gênero selecionado
-        }
-
-        List<Genero> generos = generoRepository.listar();
-        model.addAttribute("musicas", musicas);
-        model.addAttribute("generos", generos);
-        model.addAttribute("generoSelecionado", codGenero);
-
-        return "home/home"; // Retorna a página atualizada com os filtros aplicados
-    }
 }

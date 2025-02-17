@@ -124,17 +124,6 @@ public class MusicaController {
         redirectAttributes.addFlashAttribute(ATRIBUTO_MENSAGEM, "Música " + musica.getTitulo() + " adicionada com sucesso!");        
         return URL_REDIRECT_LISTA;
     }
-    
-    // // Utilizado para realizar uma requição de atualização de uma música já criada e enviar as informações para a listagem;
-    // @PostMapping("/editar/{codigo}")
-    // public String editar(@PathVariable("codigo") Integer codigo, @ModelAttribute("codigo") Musica musica, RedirectAttributes redirectAttributes) {
-    //     if (musicaRepository.update(musica)){
-    //         redirectAttributes.addFlashAttribute(ATRIBUTO_MENSAGEM, musica.getTitulo() + " atualizado com sucesso");
-    //     } else {
-    //         redirectAttributes.addFlashAttribute(ATRIBUTO_MENSAGEM, "Não foi possível atualizar "+ musica.getTitulo());
-    //     }
-    //     return URL_REDIRECT_LISTA;
-    // }
 
     @PostMapping("/editar/{codigo}")
         public String editar(@PathVariable("codigo") Integer codigo, 

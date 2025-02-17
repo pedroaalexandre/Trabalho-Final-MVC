@@ -15,10 +15,15 @@ public class UsuarioRepository {
     }
 
     public Usuario validarLogin (Usuario loginDigitado) {
-        String sql = "select desc_login, desc_senha from usuario where desc_login = ?";
+        String sql = "select desc_login as login, desc_senha as senha from usuario where desc_login = ?";
         return conexaoBanco.queryForObject(
                                 sql, 
                                 new BeanPropertyRowMapper<>(Usuario.class),
                                 loginDigitado.getLogin());
+    }
+
+    public void salvar(Usuario login) {
+        String sql = "insert into usuario(nome_usuario, desc_login, desc_senha) values (?, ?, ?)";
+        conexaoBanco.update(sql, login.getNome(), login.getLogin(), login.getSenha());
     }
 }

@@ -13,7 +13,7 @@ body {
     align-items: center;
     justify-content: center;
     min-height: 100vh;
-    background: url(../img/fundo_azul.jpg);
+    background: url(https://images.unsplash.com/photo-1655841439659-0afc60676b70?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D);
     background-size: cover;
     background-position: center;
 }
@@ -27,13 +27,17 @@ body::-webkit-scrollbar-track {
 }
   
 body::-webkit-scrollbar-thumb {
-    background-color: rgb(179, 176, 176);    /* color of the scroll thumb */
+    background-color: rgb(209, 206, 206);    /* color of the scroll thumb */
     border-radius: 20px;       /* roundness of the scroll thumb */
 }
 
 .destaques > h2 {
     font-size: 40px;
     color: white;
+}
+
+.destaques > h3 {
+    font-size: 30px;
 }
 
 .destaques {
@@ -74,17 +78,26 @@ body::-webkit-scrollbar-thumb {
 
 .banner:hover {
     transform: scale(1.05);
-    
 }
 
 .banner > img {
-    width: 120%;
+    width: 100%;
+    height: auto;
     border-radius: 10px;
+}
+
+.banner > div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
 }
 
 .banner > div > p:nth-of-type(2) {
     font-size: 13px;
     color: rgba(255, 255, 255, .8);
+    padding-top: 4px;
 }
 
 .info {
@@ -93,7 +106,7 @@ body::-webkit-scrollbar-thumb {
 
 /* CARROSSEL */
 .swiper-container {
-    width: 55vh;
+    width: 53vh;
     padding: 20px 0;
 }
 
@@ -105,9 +118,15 @@ body::-webkit-scrollbar-thumb {
 }
 
 .swiper-button-next, .swiper-button-prev {
-    color: rgb(255, 255, 255); /* Cor das setas */
+    color: white !important;
 }
 
 .swiper-pagination {
     bottom: 10px;
+    color: white !important;
+}
+
+/* Estiliza os botões de paginação do Swiper */
+.swiper-pagination-bullet {
+    background-color: white !important;
 }

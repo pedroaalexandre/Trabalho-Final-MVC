@@ -8,11 +8,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import br.iftm.edu.tspi.pmvc.projeto_crud.domain.Usuario;
 import br.iftm.edu.tspi.pmvc.projeto_crud.service.UsuarioService;
-
-
-
-
-
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestBody;
 
 @Controller
 public class UsuarioController {
@@ -35,21 +32,25 @@ public class UsuarioController {
         return URL_LOGIN;
     }
 
+    @GetMapping("/usuario/cadastro")
+    public String novo(Model model) {
+        return URL_FORM;
+    }
+    
     @PostMapping("/usuario/login")
     public String validarLogin(Usuario login, Model model) {
         if(service.verificaLogin(login)) {
-            model.addAttribute("mensagem", "Usuário logado com sucesso");
-        }else{
+            return "redirect:/home";
+        } else {
             model.addAttribute("mensagem", "Usuário ou senha inválidos");
+            return "usuario/login";
         }
-        return URL_LOGIN;
     }
 
-    // @PostMapping("/usuario/login")
-    //     public String logar(Usuario loginDigitado,Model model) {
-    //     model.addAttribute("mensagem","Você digitou o usuário"+ loginDigitado.getLogin() + " e senha "+loginDigitado.getSenha());
-    //     return URL_LOGIN;
-
-    // }
-    
+    @PostMapping("/usuario/cadastro")
+    public String cadastro(Usuario loginDigitado, Model model) {
+        service.salvar(loginDigitado);
+        model.addAttribute(ATRIBUTO_MENSAGEM, "Usuário " + loginDigitado.getLogin() + " cadastrado com sucesso");
+        return "usuario/login";
+    }
 }

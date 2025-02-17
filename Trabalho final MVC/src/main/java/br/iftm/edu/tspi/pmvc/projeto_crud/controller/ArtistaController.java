@@ -44,16 +44,6 @@ public class ArtistaController {
         return URL_LISTA;
     }
 
-    // @GetMapping("/buscar")
-    // public String buscarPorNome(@RequestParam("nome") String nome, Model model) {
-    //     List<Artista> artistaBusca = artistaRepository.buscarPorNome(nome);
-    //     model.addAttribute(ATRIBUTO_LISTA, artistaBusca);
-    //     if(artistaBusca.isEmpty()) {
-    //         model.addAttribute(ATRIBUTO_MENSAGEM, nome + " não encontrado.");
-    //     }
-    //     return URL_LISTA;
-    // }
-
     @GetMapping("/novo")
     public String abrirFormNovo(Model model) {
         Artista artista = new Artista();

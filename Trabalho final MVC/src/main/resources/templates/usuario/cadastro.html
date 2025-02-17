@@ -5,32 +5,35 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link th:href="@{/css/stylesForm.css}" rel="stylesheet">
-    <title th:text="${usuario.login != null ? 'Editar' : 'Cadastro'}">Cadastro</title>
+    <title>Cadastro</title>
 </head>
 
-<body>
+<body style="background: url('/img/fundo_cadastro.jpg') no-repeat; background-size: cover; background-position: center">
     <div class="wrapper">
 
-        <form th:action="@{${usuario.login != null ? '/usuario/editar/' + usuario.login : '/usuario/cadastro'}}" th:object="${usuario}" method="post">
-            <h1 th:text="${usuario.login != null ? 'Editar' : 'Cadastro'}">Cadastro</h1>
+        <form method="POST" action="/usuario/cadastro">
+            <h1>Cadastro</h1>
             <div class="input-box">
-                <input type="text" th:field="*{nome}" placeholder="Nome" required>
+                <input type="text" id="nome" name="nome" placeholder="Nome" required>
                 <i class='bx bx-rename' ></i>
             </div>
             <div class="input-box">
-                <input type="text" th:field="*{login}" placeholder="Usuário" required th:readonly="${usuario.login != null}">
+                <input type="text" id="login" name="login" placeholder="Usuário" required>
                 <i class='bx bxs-user'></i>
             </div>
             <div class="input-box">
-                <input type="password" th:field="*{senha}" placeholder="Senha" required>
+                <input type="password" id="senha" name="senha" placeholder="Senha" required>
+                <i class='bx bxs-lock-alt' ></i>
+            </div>
+            <div class="input-box">
+                <input type="password" id="txtCheckPwd" name="confirmaSenha" placeholder="Confirmar senha" required>
                 <i class='bx bxs-lock-alt' ></i>
             </div>
             
-            <button type="submit" class="btn" th:text="${usuario.login != null ? 'Atualizar' : 'Cadastrar'}">Cadastrar</button>
+            <button type="submit" id="btnCadastrar" class="btn">Cadastrar</button>
 
             <div class="register-link">
                 <p>Já tem uma conta? <a href="#" th:href="@{/}">Fazer Login</a></p>
-                <p>Lista de cadastros - <a href="#" th:href="@{/usuario/lista}">Editar cadastros</a></p>
             </div>
         </form>
     </div>    

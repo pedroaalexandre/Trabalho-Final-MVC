@@ -46,22 +46,6 @@ public class ArtistaRepository {
                 });
     }
 
-    // public Artista geArtista(ResultSet rs) throws SQLException {
-    //     Artista artista = new Artista();
-    //     artista.setCodigo(rs.getInt("cod_artista"));
-    //     artista.setNome(rs.getString("nome_artista"));
-    //     artista.setIdade(rs.getInt("idade_artista"));
-
-    //     Genero genero = new Genero();
-    //     genero.setCodigo(rs.getInt("cod_genero"));
-    //     genero.setDescricao(rs.getString("desc_genero"));
-    //     genero.setData(rs.getString("ano_surgimento"));
-    //     genero.setPais(rs.getString("local_surgimento"));
-
-    //     artista.setGenero(genero);
-    //     return artista;
-    // }
-
     public List<Artista> buscarPorNome(String nome) {
         String sql = """
                     select cod_artista,
