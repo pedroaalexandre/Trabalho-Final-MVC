@@ -12,7 +12,7 @@
     <div class="wrapper">
 
         <!-- <form action="#" th:action="@{/home}" method="post" id="formLogin"> -->
-        <form action="">
+        <form method="post" action="/usuario/login">
             <h1>Login</h1>
 
             <div th:if="${mensagem}" class="mensagem-servidor">
@@ -20,18 +20,16 @@
             </div>
 
             <div class="input-box">
-                <input type="text" placeholder="Usuário" required id="userLogin">
+                <input type="text" placeholder="Usuário" id="login" name="login" required>
                 <i class='bx bxs-user'></i>
             </div>
             <div class="input-box">
-                <input type="password" placeholder="Senha" required id="userPassword">
+                <input type="password" placeholder="Senha" id="senha" name="senha" required>
                 <i class='bx bxs-lock-alt' ></i>
             </div>
-            
-            <!-- <button type="submit" class="btn">Login</button> -->
+            <button type="submit" id="btnLogin" class="btn">Login</button>            
         </form>
-        <!-- <input type="button" value="Login" class="btn" id="btnLogin"> -->
-        <a href="#" th:href="@{/home}" class="btn" id="btnLogin">Login</a>
+
         <div class="register-link">
             <p>Não tem uma conta? <a href="#" th:href="@{/usuario/cadastro}">Cadastre-se</a></p>
             <p>Lista de cadastros - <a href="#" th:href="@{/usuario/lista}">Editar cadastros</a></p>
