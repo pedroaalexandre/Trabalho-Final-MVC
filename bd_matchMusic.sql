@@ -40,9 +40,7 @@ CREATE TABLE musica (
 
 -- Inserindo usuários
 INSERT INTO usuario (desc_login, desc_senha, nome_usuario) VALUES 
-('user1', 'password1', 'Alice Smith'),
-('user2', 'password2', 'Bob Johnson'),
-('user3', 'password3', 'Charlie Davis');
+('aluno', '$2a$10$x5LxuB7sf5Mx8wZyY111m.Hpp2IMqdoAUuH729l5By8eY25kwsK1S', 'Alice Smith');
 
 -- Inserindo gêneros musicais
 INSERT INTO genero (desc_genero, ano_surgimento, local_surgimento) VALUES 
@@ -57,9 +55,9 @@ INSERT INTO artista (nome_artista, data_nascimento, cod_genero) VALUES
 ('Michael Jackson', '1958-08-29', 2), -- Pop
 ('Bruno Mars', '1985-10-08', 2), -- Pop
 ('Adele', '1988-05-05', 2), -- Pop
-('Frank Sinatra', '1915-12-12', 3); -- Jazz
-("Guns N' Roses", '1985-03-26', 1); -- Rock
-('Lynyrd Skynyrd', '1964-01-01', 1); --Rock
+('Frank Sinatra', '1915-12-12', 3), -- Jazz
+("Guns N' Roses", '1985-03-26', 1), -- Rock
+('Lynyrd Skynyrd', '1964-01-01', 1); -- Rock
 
 -- Inserindo músicas associadas corretamente aos artistas
 INSERT INTO musica (titulo, ano_lancamento, duracao, imagem, cod_artista) VALUES 
@@ -85,12 +83,12 @@ INSERT INTO musica (titulo, ano_lancamento, duracao, imagem, cod_artista) VALUES
 -- Frank Sinatra (Jazz)
 ('My Way', 1969, '4:35', 'my_way.jpg', 6),
 ('Fly Me to the Moon', 1964, '2:27', 'fly_me_to_the_moon.jpg', 6),
-('Strangers in the Night', 1966, '2:35', 'strangers_in_the_night.jpg', 6);
+('Strangers in the Night', 1966, '2:35', 'strangers_in_the_night.jpg', 6),
 
 -- Inserindo músicas do Guns N' Roses
 ("Sweet Child O' Mine", 1987, '5:56', 'sweet_child_o_mine.jpg', 7),
 ('November Rain', 1991, '8:57', 'november_rain.jpg', 7),
-('Welcome to the Jungle', 1987, '4:31', 'welcome_to_the_jungle.jpg', 7);
+('Welcome to the Jungle', 1987, '4:31', 'welcome_to_the_jungle.jpg', 7),
 
 -- Inserindo músicas do Lynyrd Skynyrd
 ('Sweet Home Alabama', 1974, '4:43', 'sweet_home_alabama.jpg', 8),
