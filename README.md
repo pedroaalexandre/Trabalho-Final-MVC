@@ -4,6 +4,10 @@
 
 O projeto "MatchMusic" é uma aplicação web desenvolvida com Spring Boot e Thymeleaf, que permite gerenciar informações sobre músicas, artistas e gêneros musicais. A aplicação oferece funcionalidades para listar, adicionar, editar e excluir músicas, artistas e gêneros musicais. Além disso, a aplicação permite que os usuários façam login e cadastro.
 
+## Link para o deploy do Projeto 
+<http://matchmusic.up.railway.app>
+
+
 ## Funcionalidades
 
 - Gerenciamento de músicas: listar, adicionar, editar e excluir músicas.
