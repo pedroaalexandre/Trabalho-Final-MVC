@@ -1,13 +1,12 @@
 -- Remover e recriar o banco de dados
 DROP DATABASE IF EXISTS matchmusic;
-CREATE DATABASE matchMusic;
-USE matchMusic;
+CREATE DATABASE matchmusic;
+USE matchmusic;
 
 -- Tabela Usuario
 CREATE TABLE usuario (
-    cod_usuario INT AUTO_INCREMENT PRIMARY KEY,
-    desc_login VARCHAR(40),
-    desc_senha VARCHAR(40),
+    desc_login VARCHAR(40) PRIMARY KEY,
+    desc_senha VARCHAR(255),
     nome_usuario VARCHAR(255)
 );
 
